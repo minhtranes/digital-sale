@@ -1,1 +1,1 @@
-# digital-sale
+# Main web application
