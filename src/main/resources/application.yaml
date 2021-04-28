@@ -13,12 +13,12 @@ logging.level:
 # Was at begin of line:11 :# vaadin.whitelisted-packages= org/vaadin/example
 
 spring.datasource:
-  url: jdbc:h2:mem:testdb
+  url: jdbc:h2:mem:productdb
   platform: h2
   driverClassName: org.h2.Driver
   username: sa
-  password: sa
+  password: 
   jpa.database-platform: org.hibernate.dialect.H2Dialect
   h2.console:
     enabled: true
-    path: /data
+    path: h2-console

@@ -47,7 +47,7 @@ public class InventoryView extends Div implements BeforeEnterObserver {
 
 	private TextField name;
 	private DatePicker importDate;
-	private DatePicker productDate;
+	private DatePicker produceDate;
 	private DatePicker expirationDate;
 	private TextField importPrice;
 	private TextField salePrice;
@@ -175,13 +175,13 @@ public class InventoryView extends Div implements BeforeEnterObserver {
 
 		name = new TextField("Name");
 		importDate = new DatePicker("Import Date");
-		productDate = new DatePicker("Product Date");
+		produceDate = new DatePicker("Produce Date");
 		expirationDate = new DatePicker("Expiration Date");
 		importPrice = new TextField("Import Price");
 		salePrice = new TextField("Sale Price");
-		category = new ComboBox<>("", "");
+		category = new ComboBox<>("Category", "");
 
-		Component[] fields = new Component[] { name, importDate, productDate,
+		Component[] fields = new Component[] { name, importDate, produceDate,
 		        expirationDate, importPrice, salePrice, category };
 
 		for (Component field : fields) {
