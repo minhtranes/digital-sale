@@ -12,8 +12,8 @@ import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
@@ -22,6 +22,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
+import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.ValidationException;
@@ -45,13 +46,19 @@ public class InventoryView extends Div implements BeforeEnterObserver {
 
 	private Grid<Product> grid = new Grid<>(Product.class, false);
 
+	private TextField idString;
 	private TextField name;
-	private DatePicker importDate;
-	private DatePicker produceDate;
+	private DateTimePicker importDate;
 	private DatePicker expirationDate;
-	private TextField importPrice;
-	private TextField salePrice;
-	private ComboBox<String> category;
+	private NumberField importPrice;
+	private NumberField salePrice;
+	private TextField retailDepartment;
+	private TextField city;
+	private TextField phoneNumber;
+	private TextField currency;
+	private TextField businessAddress;
+	private TextField shippingAddress;
+	
 
 	private Button cancel = new Button("Cancel");
 	private Button save = new Button("Save");
@@ -80,13 +87,19 @@ public class InventoryView extends Div implements BeforeEnterObserver {
 		add(splitLayout);
 
 		// Configure Grid
+		grid.addColumn("idString").setAutoWidth(true);
 		grid.addColumn("name").setAutoWidth(true);
 		grid.addColumn("importDate").setAutoWidth(true);
-		grid.addColumn("produceDate").setAutoWidth(true);
+		grid.addColumn("expirationDate").setAutoWidth(true);
 		grid.addColumn("importPrice").setAutoWidth(true);
 		grid.addColumn("salePrice").setAutoWidth(true);
-		grid.addColumn("expirationDate").setAutoWidth(true);
-		grid.addColumn("category").setAutoWidth(true);
+		grid.addColumn("retailDepartment").setAutoWidth(true);
+		grid.addColumn("city").setAutoWidth(true);
+		grid.addColumn("phoneNumber").setAutoWidth(true);
+		grid.addColumn("currency").setAutoWidth(true);
+		grid.addColumn("businessAddress").setAutoWidth(true);
+		grid.addColumn("shippingAddress").setAutoWidth(true);
+		
 		TemplateRenderer<Product> importantRenderer = TemplateRenderer
 		        .<Product>of(
 		                "<iron-icon hidden='[[!item.expired]]' icon='vaadin:check' style='width: var(--lumo-icon-size-s); height: var(--lumo-icon-size-s); color: var(--lumo-primary-text-color);'></iron-icon><iron-icon hidden='[[item.important]]' icon='vaadin:minus' style='width: var(--lumo-icon-size-s); height: var(--lumo-icon-size-s); color: var(--lumo-disabled-text-color);'></iron-icon>")
@@ -173,16 +186,22 @@ public class InventoryView extends Div implements BeforeEnterObserver {
 
 		FormLayout formLayout = new FormLayout();
 
+		idString=new TextField("ID String");
 		name = new TextField("Name");
-		importDate = new DatePicker("Import Date");
-		produceDate = new DatePicker("Produce Date");
+		retailDepartment=new TextField("Rail Department");
+		importDate = new DateTimePicker("Import Date");
 		expirationDate = new DatePicker("Expiration Date");
-		importPrice = new TextField("Import Price");
-		salePrice = new TextField("Sale Price");
-		category = new ComboBox<>("Category", "");
+		importPrice = new NumberField("Import Price");
+		salePrice = new NumberField("Sale Price");
+		city= new TextField("City");
+		phoneNumber= new TextField("Phone");
+		currency= new TextField("Currency");
+		businessAddress= new TextField("Business Address");
+		shippingAddress= new TextField("Shipping Address");
 
-		Component[] fields = new Component[] { name, importDate, produceDate,
-		        expirationDate, importPrice, salePrice, category };
+		Component[] fields = new Component[] { idString, name, importDate, 
+		        expirationDate, importPrice, salePrice, retailDepartment,city,phoneNumber
+		        , currency, businessAddress,shippingAddress};
 
 		for (Component field : fields) {
 			((HasStyle) field).addClassName("full-width");

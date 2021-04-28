@@ -6,18 +6,39 @@ import javax.persistence.Table;
 import vn.digitalsaler.app.data.AbstractEntity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "product")
 public class Product extends AbstractEntity {
-
+	private String idString;
 	private String name;
-	private LocalDate importDate;
-	private LocalDate produceDate;
-	private String importPrice;
-	private String salePrice;
+	private String retailDepartment;
+	private String city;
+	private String phoneNumber;
+	private String currency;
+	private String businessAddress;
+	private Double importPrice;
+	private Double salePrice;
+	private String shippingAddress;
+	private LocalDateTime importDate;
 	private LocalDate expirationDate;
-	private String category;
+
+	public Double getSalePrice() {
+		return salePrice;
+	}
+
+	public void setSalePrice(Double salePrice) {
+		this.salePrice = salePrice;
+	}
+
+	public String getIdString() {
+		return idString;
+	}
+
+	public void setIdString(String idString) {
+		this.idString = idString;
+	}
 
 	public String getName() {
 		return name;
@@ -27,36 +48,68 @@ public class Product extends AbstractEntity {
 		this.name = name;
 	}
 
-	public LocalDate getImportDate() {
-		return importDate;
+	public String getRetailDepartment() {
+		return retailDepartment;
 	}
 
-	public void setImportDate(LocalDate importDate) {
-		this.importDate = importDate;
+	public void setRetailDepartment(String retailDepartment) {
+		this.retailDepartment = retailDepartment;
 	}
 
-	public LocalDate getProduceDate() {
-		return produceDate;
+	public String getCity() {
+		return city;
 	}
 
-	public void setProduceDate(LocalDate produceDate) {
-		this.produceDate = produceDate;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public String getImportPrice() {
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	public String getBusinessAddress() {
+		return businessAddress;
+	}
+
+	public void setBusinessAddress(String businessAddress) {
+		this.businessAddress = businessAddress;
+	}
+
+	public Double getImportPrice() {
 		return importPrice;
 	}
 
-	public void setImportPrice(String importPrice) {
+	public void setImportPrice(Double importPrice) {
 		this.importPrice = importPrice;
 	}
 
-	public String getSalePrice() {
-		return salePrice;
+	public String getShippingAddress() {
+		return shippingAddress;
 	}
 
-	public void setSalePrice(String salePrice) {
-		this.salePrice = salePrice;
+	public void setShippingAddress(String shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+
+	public LocalDateTime getImportDate() {
+		return importDate;
+	}
+
+	public void setImportDate(LocalDateTime importDate) {
+		this.importDate = importDate;
 	}
 
 	public LocalDate getExpirationDate() {
@@ -67,16 +120,8 @@ public class Product extends AbstractEntity {
 		this.expirationDate = expirationDate;
 	}
 
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
 	public boolean isExpired() {
-		if (expirationDate == null || produceDate == null) {
+		if (expirationDate == null) {
 			return false;
 		}
 		return expirationDate.isBefore(LocalDate.now());
