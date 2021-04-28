@@ -1,10 +1,5 @@
 package vn.digitalsaler.app.data.generator;
 
-import com.vaadin.flow.spring.annotation.SpringComponent;
-
-import vn.digitalsaler.app.data.entity.SamplePerson;
-import vn.digitalsaler.app.data.service.SamplePersonRepository;
-
 import java.time.LocalDateTime;
 
 import org.slf4j.Logger;
@@ -13,6 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.vaadin.artur.exampledata.DataType;
 import org.vaadin.artur.exampledata.ExampleDataGenerator;
+
+import com.vaadin.flow.spring.annotation.SpringComponent;
+
+import vn.digitalsaler.app.data.entity.SamplePerson;
+import vn.digitalsaler.app.data.service.SamplePersonRepository;
 
 @SpringComponent
 public class DataGenerator {
@@ -45,5 +45,4 @@ public class DataGenerator {
             logger.info("Generated demo data");
         };
     }
-
 }

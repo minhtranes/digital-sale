@@ -24,6 +24,7 @@ import vn.digitalsaler.app.views.addressform.AddressFormView;
 import vn.digitalsaler.app.views.cardlist.CardListView;
 import vn.digitalsaler.app.views.empty.EmptyView;
 import vn.digitalsaler.app.views.helloworld.HelloWorldView;
+import vn.digitalsaler.app.views.inventory.InventoryView;
 import vn.digitalsaler.app.views.main.MainView;
 import vn.digitalsaler.app.views.map.MapView;
 import vn.digitalsaler.app.views.masterdetail.MasterDetailView;
@@ -37,7 +38,7 @@ import com.vaadin.flow.component.dependency.CssImport;
 /**
  * The main view is a top-level placeholder for other views.
  */
-@PWA(name = "My App", shortName = "My App", enableInstallPrompt = false)
+@PWA(name = "Digital Saler", shortName = "Digital Saler", enableInstallPrompt = false)
 @JsModule("./styles/shared-styles.js")
 @CssImport("./views/main/main-view.css")
 public class MainView extends AppLayout {
@@ -76,8 +77,8 @@ public class MainView extends AppLayout {
         HorizontalLayout logoLayout = new HorizontalLayout();
         logoLayout.setId("logo");
         logoLayout.setAlignItems(FlexComponent.Alignment.CENTER);
-        logoLayout.add(new Image("images/logo.png", "My App logo"));
-        logoLayout.add(new H1("My App"));
+        logoLayout.add(new Image("images/logo.png", "Digital Saler logo"));
+        logoLayout.add(new H1("Digital Saler"));
         layout.add(logoLayout, menu);
         return layout;
     }
@@ -92,10 +93,17 @@ public class MainView extends AppLayout {
     }
 
     private Component[] createMenuItems() {
-        return new Tab[]{createTab("Hello World", HelloWorldView.class), createTab("About", AboutView.class),
-                createTab("Address Form", AddressFormView.class), createTab("Map", MapView.class),
-                createTab("Card List", CardListView.class), createTab("Master-Detail", MasterDetailView.class),
-                createTab("Empty", EmptyView.class), createTab("Person Form", PersonFormView.class)};
+        return new Tab[]{
+        		createTab("Inventory", InventoryView.class),
+        		createTab("About", AboutView.class),
+        		createTab("Hello World", HelloWorldView.class),
+                createTab("Address Form", AddressFormView.class), 
+                createTab("Map", MapView.class),
+                createTab("Card List", CardListView.class), 
+                createTab("Master-Detail", MasterDetailView.class),
+                createTab("Empty", EmptyView.class), 
+                createTab("Person Form", PersonFormView.class)
+                };
     }
 
     private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
