@@ -188,7 +188,7 @@ public class InventoryView extends Div implements BeforeEnterObserver {
 
 		idString=new TextField("ID String");
 		name = new TextField("Name");
-		retailDepartment=new TextField("Rail Department");
+		retailDepartment=new TextField("Retail Department");
 		importDate = new DateTimePicker("Import Date");
 		expirationDate = new DatePicker("Expiration Date");
 		importPrice = new NumberField("Import Price");
