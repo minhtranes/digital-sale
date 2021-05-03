@@ -15,6 +15,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
@@ -36,6 +37,7 @@ import vn.digitalsaler.app.data.entity.Product;
 import vn.digitalsaler.app.data.service.ProductService;
 import vn.digitalsaler.app.views.main.MainView;
 
+// @JsModule("./components/ProductService.ts")
 @Route(value = "inventory/:productID?/:action?(edit)", layout = MainView.class)
 @PageTitle("Inventory")
 @CssImport("./views/masterdetail/master-detail-view.css")
