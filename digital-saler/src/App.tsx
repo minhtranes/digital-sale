@@ -11,10 +11,12 @@ import {
   Users,
   History,
 } from "./pages/Overviews";
+import Navbar from "./components/navbar/Navbar";
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <Sidebar />
       <Switch>
         <Route path="/overview" component={Overview} exact></Route>
