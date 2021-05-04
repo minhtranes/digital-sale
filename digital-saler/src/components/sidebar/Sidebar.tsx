@@ -7,33 +7,6 @@ import { SidebarData } from "./SidebarData";
 import Submenu from "./Submenu";
 import Navbar from "../navbar/Navbar";
 
-const Nav = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 5rem;
-  background-color: green;
-`;
-
-const SidebarNav = styled.div<{ sidebar: boolean }>`
-  width: 250px;
-  height: 100vh;
-  background-color: black;
-  position: fixed;
-  top: 0;
-  left: ${({ sidebar }) => (sidebar ? "0" : "-100%")};
-  transition: 350ms;
-`;
-
-const NavIcon = styled(Link)`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 5rem;
-  font-size: 2rem;
-  margin-left: 2rem;
-`;
-
 const SidebarWrap = styled.div``;
 
 const Sidebar: FC = () => {
@@ -42,22 +15,25 @@ const Sidebar: FC = () => {
 
   return (
     <IconContext.Provider value={{ color: "#fff" }}>
-      <Nav>
-        <NavIcon to="#" onClick={showSidebar}>
+      <div className="navbar">
+        <Link className="navbar-icon" to="#" onClick={showSidebar}>
           <AiOutlineMenu />
-        </NavIcon>
+        </Link>
         <Navbar />
-      </Nav>
-      <SidebarNav sidebar={sidebar}>
+      </div>
+      <div
+        className="sidebar"
+        style={{ left: sidebar === true ? "0%" : "-100%" }}
+      >
         <SidebarWrap>
-          <NavIcon to="#" onClick={showSidebar}>
+          <Link to="#" onClick={showSidebar} className="navbar-icon">
             <AiOutlineClose />
-          </NavIcon>
+          </Link>
           {SidebarData.map((item, index) => {
             return <Submenu item={item} key={index} />;
           })}
         </SidebarWrap>
-      </SidebarNav>
+      </div>
     </IconContext.Provider>
   );
 };
