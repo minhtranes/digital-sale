@@ -24,7 +24,6 @@ import Sidebar from "./components/sidebar/Sidebar";
 function App() {
   return (
     <Router>
-      <Navbar />
       <Sidebar />
       <Switch>
         <Route path="/overview" component={Overview} exact></Route>

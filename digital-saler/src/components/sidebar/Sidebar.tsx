@@ -5,13 +5,14 @@ import { IconContext } from "react-icons";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { SidebarData } from "./SidebarData";
 import Submenu from "./Submenu";
+import Navbar from "../navbar/Navbar";
 
 const Nav = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   height: 5rem;
-  background-color: black;
+  background-color: green;
 `;
 
 const SidebarNav = styled.div<{ sidebar: boolean }>`
@@ -45,6 +46,7 @@ const Sidebar: FC = () => {
         <NavIcon to="#" onClick={showSidebar}>
           <AiOutlineMenu />
         </NavIcon>
+        <Navbar />
       </Nav>
       <SidebarNav sidebar={sidebar}>
         <SidebarWrap>
