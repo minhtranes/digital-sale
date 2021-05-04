@@ -7,7 +7,7 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 import { FaCog, FaOpencart } from "react-icons/fa";
-import { SidebarItem } from "../models/SidebarItem";
+import { SidebarItem } from "./SidebarItem";
 
 export const SidebarData: SidebarItem[] = [
   {

@@ -1,7 +1,6 @@
 import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { SidebarItem } from "../models/SidebarItem";
+import { SidebarItem } from "./SidebarItem";
 import "./Sidebar.css";
 
 type SidebarLinkProps = {
