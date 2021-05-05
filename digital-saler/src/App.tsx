@@ -12,14 +12,14 @@ import {
   History,
   ContactUs,
   Home,
-  Products,
   Services,
-  Consulting,
   Marketing,
   SignUp,
+  Consulting,
 } from "./pages/Overviews";
 import Navbar from "./components/navbar/Navbar";
 import Sidebar from "./components/sidebar/Sidebar";
+import { Products } from "./components/products/Products";
 
 function App() {
   return (

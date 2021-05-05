@@ -33,10 +33,6 @@ export const Services: FC = () => {
   return <div className="overview">Home</div>;
 };
 
-export const Products: FC = () => {
-  return <div className="overview">Products</div>;
-};
-
 export const ContactUs: FC = () => {
   return <div className="overview">ContactUs</div>;
 };
