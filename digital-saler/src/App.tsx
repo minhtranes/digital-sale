@@ -19,7 +19,7 @@ import {
 } from "./pages/Overviews";
 import Navbar from "./components/navbar/Navbar";
 import Sidebar from "./components/sidebar/Sidebar";
-import { Products } from "./components/products/Products";
+import { Products } from "./components/product/Products";
 
 function App() {
   return (
