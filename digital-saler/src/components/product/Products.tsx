@@ -1,37 +1,59 @@
 import Card from "@material-ui/core/Card";
 import SortIcon from "@material-ui/icons/ArrowDownward";
-import React, { FC } from "react";
+import axios from "axios";
+import React, { FC, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import products from "./ProductData";
 
 const columns = [
   {
-    name: "Title",
-    selector: "title",
+    name: "Id",
+    selector: "id",
     sortable: true,
   },
   {
-    name: "Directior",
-    selector: "director",
+    name: "Email",
+    selector: "email",
     sortable: true,
   },
   {
-    name: "Runtime (m)",
-    selector: "runtime",
+    name: "First Name",
+    selector: "first_name",
     sortable: true,
-    right: true,
+  },
+  {
+    name: "Last Name",
+    selector: "last_name",
+    sortable: true,
   },
 ];
 
-export const Products: FC = () => {
+interface Product {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  avarta: string;
+}
+
+type ProductList = Product[];
+
+export const Products: FC = (Props) => {
+  const [products, setProducts] = useState<ProductList>([]);
+
+  useEffect(() => {
+    axios.get<ProductList>("https://reqres.in/api/users?page=1").then((r) => {
+      console.log(r.data);
+      setProducts(r.data);
+    });
+  }, []);
+
   return (
     <div className="product-table">
       <Card>
         <DataTable
-          title="Inventory"
           columns={columns}
           data={products}
-          defaultSortField="title"
+          defaultSortField="id"
           sortIcon={<SortIcon />}
           pagination
           selectableRows
