@@ -41,7 +41,7 @@ export const Products: FC = (Props) => {
   const [products, setProducts] = useState<ProductList>([]);
 
   useEffect(() => {
-    axios.get<ProductList>("https://reqres.in/api/users?page=1").then((r) => {
+    axios.get<ProductList>("http://8gll4.mocklab.io/json/1").then((r) => {
       console.log(r.data);
       setProducts(r.data);
     });
