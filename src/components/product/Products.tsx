@@ -148,7 +148,7 @@ interface Product {
 type ProductList = { content: Product[]; totalElements: number };
 
 const inventoryRepository = axios.create({
-  baseURL: "http://localhost:8080/inventory",
+  baseURL: "https://digital-saler-inventory.herokuapp.com/inventory",
   headers: { "Content-Type": "application/json" },
 });
 
@@ -161,19 +161,28 @@ export const Products: FC = (Props) => {
     MainSidebarContext
   );
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   useEffect(() => {
+    setLoading(true);
+
     inventoryRepository.get<ProductList>("/list").then((r) => {
       console.log(r.data);
       setProducts(r.data);
     });
+    setLoading(false);
   }, []);
 
   const handlePageChange = (page: number) => {
+    setLoading(true);
+
     console.log("Page change to " + page);
     inventoryRepository.get<ProductList>(`/list?page={page}`).then((r) => {
       console.log(r.data);
       setProducts(r.data);
     });
+
+    setLoading(false);
   };
 
   return (
@@ -195,6 +204,7 @@ export const Products: FC = (Props) => {
           paginationTotalRows={products.totalElements}
           highlightOnHover={true}
           onChangePage={handlePageChange}
+          progressPending={loading}
         />
       </Card>
     </div>
