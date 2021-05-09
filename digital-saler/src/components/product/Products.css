@@ -2,3 +2,8 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+.rdt_TableHeader {
+  font-size: larger;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}

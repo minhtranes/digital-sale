@@ -6,13 +6,13 @@
   top: 0;
   transition: 350ms;
   left: 0;
+  z-index: 10;
 }
 
 .sidebar-link {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 1.2rem;
   font-size: 1.125rem;
   padding: 1rem;
   text-decoration: none;
@@ -21,7 +21,8 @@
 
 .sidebar-link a:hover {
   background-color: #1f1f1b;
-  border-left: 4px solid #6d44dc;
+  border-radius: 4px;
+  transition: all 0.2s ease-out;
 }
 
 .sidebar-label {
@@ -42,7 +43,9 @@
 }
 
 .dropdown-link a:hover {
-  background-color: #6d44dc;
+  background-color: #370bb3;
+  border-radius: 4px;
+  transition: all 0.2s ease-out;
 }
 
 .sidebar-sub-label {

@@ -1,4 +1,5 @@
 import Card from "@material-ui/core/Card";
+import { green } from "@material-ui/core/colors";
 import SortIcon from "@material-ui/icons/ArrowDownward";
 import axios from "axios";
 import React, { FC, useEffect, useState } from "react";
@@ -10,11 +11,7 @@ const columns = [
     selector: "id",
     sortable: true,
   },
-  {
-    name: "Email",
-    selector: "email",
-    sortable: true,
-  },
+
   {
     name: "First Name",
     selector: "first_name",
@@ -25,14 +22,47 @@ const columns = [
     selector: "last_name",
     sortable: true,
   },
+  {
+    name: "Email",
+    selector: "email",
+    sortable: true,
+  },
+  {
+    name: "Avatar",
+    selector: "avatar",
+    sortable: false,
+  },
 ];
+const customStyles = {
+  rows: {
+    style: {
+      minHeight: "35px",
+    },
+  },
+  headCells: {
+    style: {
+      paddingLeft: "8px",
+      paddingRight: "8px",
+      fontSize: "23px",
+      fontWeight: 600,
+      color: "#1b5e20",
+    },
+  },
+  cells: {
+    style: {
+      paddingLeft: "8px",
+      paddingRight: "8px",
+      fontSize: "16px",
+    },
+  },
+};
 
 interface Product {
   id: number;
   email: string;
   first_name: string;
   last_name: string;
-  avarta: string;
+  avatar: string;
 }
 
 type ProductList = Product[];
@@ -57,6 +87,7 @@ export const Products: FC = (Props) => {
           sortIcon={<SortIcon />}
           pagination
           selectableRows
+          customStyles={customStyles}
         />
       </Card>
     </div>
