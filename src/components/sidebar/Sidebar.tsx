@@ -10,6 +10,14 @@ import { createContext } from "react";
 
 const SidebarWrap = styled.div``;
 
+export type SidebarType = {
+  sidebarOpened: boolean;
+};
+
+export const SidebarContext1 = createContext({
+  sidebarOpened: true,
+});
+
 const Sidebar: FC = () => {
   const [sidebarOpened, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebarOpened);

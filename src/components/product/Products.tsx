@@ -1,10 +1,9 @@
 import Card from "@material-ui/core/Card";
-import { green } from "@material-ui/core/colors";
 import SortIcon from "@material-ui/icons/ArrowDownward";
 import axios from "axios";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import Sidebar from "../sidebar/Sidebar";
+import { SidebarType, SidebarContext1 } from "../sidebar/Sidebar";
 
 const columns = [
   {
@@ -94,6 +93,7 @@ type ProductList = Product[];
 
 export const Products: FC = (Props) => {
   const [products, setProducts] = useState<ProductList>([]);
+  const { sidebarOpened } = useContext<SidebarType>(SidebarContext1);
 
   useEffect(() => {
     axios.get<ProductList>("http://8gll4.mocklab.io/json/1").then((r) => {
@@ -103,7 +103,10 @@ export const Products: FC = (Props) => {
   }, []);
 
   return (
-    <div className="product-table">
+    <div
+      className="product-table"
+      style={{ paddingLeft: sidebarOpened === true ? 220 : 0 }}
+    >
       <Card>
         <DataTable
           columns={columns}
@@ -120,3 +123,6 @@ export const Products: FC = (Props) => {
     </div>
   );
 };
+function SidebarContext(SidebarContext: any): { sidebarOpened: any } {
+  throw new Error("Function not implemented.");
+}
