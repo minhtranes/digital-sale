@@ -161,6 +161,8 @@ export const Products: FC = (Props) => {
     MainSidebarContext
   );
 
+  const [paginationPerPage, setPaginationPerPage] = useState<number>(20);
+
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -185,6 +187,10 @@ export const Products: FC = (Props) => {
     setLoading(false);
   };
 
+  const editProduct = (product: Product) => {
+    console.log("Product selected" + product.id);
+  };
+
   return (
     <div
       className="product-table"
@@ -205,6 +211,8 @@ export const Products: FC = (Props) => {
           highlightOnHover={true}
           onChangePage={handlePageChange}
           progressPending={loading}
+          paginationPerPage={paginationPerPage}
+          onRowDoubleClicked={editProduct}
         />
       </Card>
     </div>
