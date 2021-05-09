@@ -14,25 +14,69 @@ const columns = [
     selector: "id",
     sortable: true,
   },
-
   {
-    name: "First Name",
-    selector: "first_name",
+    name: "IdS",
+    selector: "idString",
     sortable: true,
   },
   {
-    name: "Last Name",
-    selector: "last_name",
+    name: "Name",
+    selector: "name",
     sortable: true,
   },
   {
-    name: "Email",
-    selector: "email",
+    name: "Retail Department",
+    selector: "retailDepartment",
     sortable: true,
   },
   {
-    name: "Avatar",
-    selector: "avatar",
+    name: "City",
+    selector: "city",
+    sortable: true,
+  },
+  {
+    name: "Phone Number",
+    selector: "phoneNumber",
+    sortable: false,
+  },
+  {
+    name: "Currency",
+    selector: "currency",
+    sortable: false,
+  },
+  {
+    name: "Business Address",
+    selector: "curbusinessAddressrency",
+    sortable: false,
+  },
+  {
+    name: "Import Price",
+    selector: "importPrice",
+    sortable: false,
+  },
+  {
+    name: "Sale Price",
+    selector: "salePrice",
+    sortable: false,
+  },
+  {
+    name: "Shipping Address",
+    selector: "shippingAddress",
+    sortable: false,
+  },
+  {
+    name: "Import Date",
+    selector: "importDate",
+    sortable: false,
+  },
+  {
+    name: "Expiration Date",
+    selector: "expirationDate",
+    sortable: false,
+  },
+  {
+    name: "Expired",
+    selector: "expired",
     sortable: false,
   },
 ];
@@ -48,7 +92,7 @@ const customStyles = {
   header: {
     style: {
       fontSize: "22px",
-      minHeight: "56px",
+      minHeight: "1px",
       paddingLeft: "16px",
       paddingRight: "8px",
     },
@@ -86,22 +130,36 @@ const customStyles = {
 
 interface Product {
   id: number;
-  email: string;
-  first_name: string;
-  last_name: string;
-  avatar: string;
+  idString: string;
+  name: string;
+  retailDepartment: string;
+  city: number;
+  phoneNumber: string;
+  currency: string;
+  businessAddress: string;
+  importPrice: number;
+  salePrice: number;
+  shippingAddress: string;
+  importDate: string;
+  expirationDate: string;
+  expired: boolean;
 }
 
-type ProductList = Product[];
+type ProductList = { content: Product[] };
+
+const inventoryRepository = axios.create({
+  baseURL: "http://localhost:8080/inventory",
+  headers: { "Content-Type": "application/json" },
+});
 
 export const Products: FC = (Props) => {
-  const [products, setProducts] = useState<ProductList>([]);
+  const [products, setProducts] = useState<ProductList>({ content: [] });
   const { sidebarOpened, sidebarWidth } = useContext<SidebarType>(
     MainSidebarContext
   );
 
   useEffect(() => {
-    axios.get<ProductList>("http://8gll4.mocklab.io/json/1").then((r) => {
+    inventoryRepository.get<ProductList>("/list").then((r) => {
       console.log(r.data);
       setProducts(r.data);
     });
@@ -115,7 +173,7 @@ export const Products: FC = (Props) => {
       <Card>
         <DataTable
           columns={columns}
-          data={products}
+          data={products.content}
           defaultSortField="id"
           sortIcon={<SortIcon />}
           pagination
