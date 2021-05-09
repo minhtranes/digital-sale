@@ -3,7 +3,10 @@ import SortIcon from "@material-ui/icons/ArrowDownward";
 import axios from "axios";
 import React, { FC, useContext, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { SidebarType, SidebarContext1 } from "../sidebar/Sidebar";
+import {
+  SidebarType,
+  SidebarContext as SC,
+} from "../context/SidebarContextProvider";
 
 const columns = [
   {
@@ -93,7 +96,7 @@ type ProductList = Product[];
 
 export const Products: FC = (Props) => {
   const [products, setProducts] = useState<ProductList>([]);
-  const { sidebarOpened } = useContext<SidebarType>(SidebarContext1);
+  const { sidebarOpened } = useContext<SidebarType>(SC);
 
   useEffect(() => {
     axios.get<ProductList>("http://8gll4.mocklab.io/json/1").then((r) => {

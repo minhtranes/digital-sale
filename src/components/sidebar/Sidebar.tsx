@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { IconContext } from "react-icons";
@@ -6,21 +6,17 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { SidebarData } from "./SidebarData";
 import Submenu from "./Submenu";
 import Navbar from "../navbar/Navbar";
-import { createContext } from "react";
+import { SidebarContext, SidebarType } from "../context/SidebarContextProvider";
 
 const SidebarWrap = styled.div``;
 
-export type SidebarType = {
-  sidebarOpened: boolean;
-};
-
-export const SidebarContext1 = createContext({
-  sidebarOpened: true,
-});
-
 const Sidebar: FC = () => {
   const [sidebarOpened, setSidebar] = useState(false);
-  const showSidebar = () => setSidebar(!sidebarOpened);
+  const showSidebar = () => {
+    setSidebar(!sidebarOpened);
+    updateSidebar(!sidebarOpened);
+  };
+  const { updateSidebar } = useContext<SidebarType>(SidebarContext);
 
   return (
     <IconContext.Provider value={{ color: "#fff" }}>
