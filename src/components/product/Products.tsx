@@ -4,6 +4,7 @@ import SortIcon from "@material-ui/icons/ArrowDownward";
 import axios from "axios";
 import React, { FC, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
+import Sidebar from "../sidebar/Sidebar";
 
 const columns = [
   {

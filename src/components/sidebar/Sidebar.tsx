@@ -6,12 +6,13 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { SidebarData } from "./SidebarData";
 import Submenu from "./Submenu";
 import Navbar from "../navbar/Navbar";
+import { createContext } from "react";
 
 const SidebarWrap = styled.div``;
 
 const Sidebar: FC = () => {
-  const [sidebar, setSidebar] = useState(false);
-  const showSidebar = () => setSidebar(!sidebar);
+  const [sidebarOpened, setSidebar] = useState(false);
+  const showSidebar = () => setSidebar(!sidebarOpened);
 
   return (
     <IconContext.Provider value={{ color: "#fff" }}>
@@ -23,7 +24,7 @@ const Sidebar: FC = () => {
       </div>
       <div
         className="sidebar"
-        style={{ left: sidebar === true ? "0%" : "-100%" }}
+        style={{ left: sidebarOpened === true ? "-100%" : "0%" }}
       >
         <SidebarWrap>
           <Link to="#" onClick={showSidebar} className="navbar-icon">
