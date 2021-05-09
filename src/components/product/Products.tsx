@@ -96,7 +96,9 @@ type ProductList = Product[];
 
 export const Products: FC = (Props) => {
   const [products, setProducts] = useState<ProductList>([]);
-  const { sidebarOpened } = useContext<SidebarType>(MainSidebarContext);
+  const { sidebarOpened, sidebarWidth } = useContext<SidebarType>(
+    MainSidebarContext
+  );
 
   useEffect(() => {
     axios.get<ProductList>("http://8gll4.mocklab.io/json/1").then((r) => {
@@ -108,7 +110,7 @@ export const Products: FC = (Props) => {
   return (
     <div
       className="product-table"
-      style={{ paddingLeft: sidebarOpened === true ? 220 : 0 }}
+      style={{ paddingLeft: sidebarOpened === true ? sidebarWidth : 0 }}
     >
       <Card>
         <DataTable

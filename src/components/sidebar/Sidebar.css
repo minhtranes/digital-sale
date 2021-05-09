@@ -14,14 +14,14 @@
   justify-content: space-between;
   align-items: center;
   font-size: 1.125rem;
-  padding: 1rem;
   text-decoration: none;
   color: #ffffff;
+  padding: 0.5rem 1rem 0.5rem 1rem;
 }
 
-.sidebar-link a:hover {
-  background-color: #1f1f1b;
-  border-radius: 4px;
+.sidebar-link :hover {
+  background-color: #1888ff;
+  border-radius: 5px;
   transition: all 0.2s ease-out;
 }
 
@@ -38,6 +38,7 @@
   align-items: center;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+  padding-bottom: 40px;
 }
 
 .dropdown-link {
