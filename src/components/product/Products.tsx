@@ -111,7 +111,7 @@ const customStyles = {
     style: {
       paddingLeft: "8px",
       paddingRight: "8px",
-      fontSize: "23px",
+      fontSize: "20px",
       fontWeight: 600,
       color: "#fff",
     },
@@ -145,7 +145,7 @@ interface Product {
   expired: boolean;
 }
 
-type ProductList = { content: Product[] };
+type ProductList = { content: Product[]; totalElements: number };
 
 const inventoryRepository = axios.create({
   baseURL: "http://localhost:8080/inventory",
@@ -153,7 +153,10 @@ const inventoryRepository = axios.create({
 });
 
 export const Products: FC = (Props) => {
-  const [products, setProducts] = useState<ProductList>({ content: [] });
+  const [products, setProducts] = useState<ProductList>({
+    content: [],
+    totalElements: 0,
+  });
   const { sidebarOpened, sidebarWidth } = useContext<SidebarType>(
     MainSidebarContext
   );
@@ -164,6 +167,14 @@ export const Products: FC = (Props) => {
       setProducts(r.data);
     });
   }, []);
+
+  const handlePageChange = (page: number) => {
+    console.log("Page change to " + page);
+    inventoryRepository.get<ProductList>(`/list?page={page}`).then((r) => {
+      console.log(r.data);
+      setProducts(r.data);
+    });
+  };
 
   return (
     <div
@@ -180,7 +191,10 @@ export const Products: FC = (Props) => {
           selectableRows
           customStyles={customStyles}
           striped={true}
+          // paginationServer
+          paginationTotalRows={products.totalElements}
           highlightOnHover={true}
+          onChangePage={handlePageChange}
         />
       </Card>
     </div>
