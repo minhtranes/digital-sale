@@ -31,6 +31,15 @@
   font-weight: 400;
 }
 
+.sidebar-logo {
+  color: rgb(179, 190, 179);
+  font-weight: 400;
+  font-size: 50px;
+  align-items: center;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
 .dropdown-link {
   display: flex;
   justify-content: flex-start;

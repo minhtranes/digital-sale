@@ -5,7 +5,7 @@ import React, { FC, useContext, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import {
   SidebarType,
-  SidebarContext as SC,
+  MainSidebarContext,
 } from "../context/SidebarContextProvider";
 
 const columns = [
@@ -96,7 +96,7 @@ type ProductList = Product[];
 
 export const Products: FC = (Props) => {
   const [products, setProducts] = useState<ProductList>([]);
-  const { sidebarOpened } = useContext<SidebarType>(SC);
+  const { sidebarOpened } = useContext<SidebarType>(MainSidebarContext);
 
   useEffect(() => {
     axios.get<ProductList>("http://8gll4.mocklab.io/json/1").then((r) => {
@@ -126,6 +126,3 @@ export const Products: FC = (Props) => {
     </div>
   );
 };
-function SidebarContext(SidebarContext: any): { sidebarOpened: any } {
-  throw new Error("Function not implemented.");
-}

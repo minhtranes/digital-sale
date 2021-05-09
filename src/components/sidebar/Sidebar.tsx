@@ -6,17 +6,20 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { SidebarData } from "./SidebarData";
 import Submenu from "./Submenu";
 import Navbar from "../navbar/Navbar";
-import { SidebarContext, SidebarType } from "../context/SidebarContextProvider";
+import {
+  MainSidebarContext,
+  SidebarType,
+} from "../context/SidebarContextProvider";
 
 const SidebarWrap = styled.div``;
 
 const Sidebar: FC = () => {
   const [sidebarOpened, setSidebar] = useState(false);
   const showSidebar = () => {
-    setSidebar(!sidebarOpened);
     updateSidebar(!sidebarOpened);
+    setSidebar(!sidebarOpened);
   };
-  const { updateSidebar } = useContext<SidebarType>(SidebarContext);
+  const { updateSidebar } = useContext<SidebarType>(MainSidebarContext);
 
   return (
     <IconContext.Provider value={{ color: "#fff" }}>
@@ -31,9 +34,7 @@ const Sidebar: FC = () => {
         style={{ left: sidebarOpened === true ? "-100%" : "0%" }}
       >
         <SidebarWrap>
-          <Link to="#" onClick={showSidebar} className="navbar-icon">
-            <AiOutlineClose />
-          </Link>
+          <div className="sidebar-logo">Digital Saler</div>
           {SidebarData.map((item, index) => {
             return <Submenu item={item} key={index} />;
           })}

@@ -5,7 +5,7 @@ export type SidebarType = {
   updateSidebar: (isOpened: boolean) => void;
 };
 
-export const SidebarContext = createContext<SidebarType>({
+export const MainSidebarContext = createContext<SidebarType>({
   sidebarOpened: true,
   updateSidebar: (isOpened: boolean) => {},
 });
@@ -14,13 +14,14 @@ const SidebarContextProvider: React.FC<React.ReactNode> = ({ children }) => {
   const [sidebarOpened, setSidebarStatus] = useState<boolean>(true);
 
   const updateSidebar = (isOpened: boolean) => {
+    console.info("Side status changed to: " + isOpened);
     setSidebarStatus(isOpened);
   };
 
   return (
-    <SidebarContext.Provider value={{ sidebarOpened, updateSidebar }}>
+    <MainSidebarContext.Provider value={{ sidebarOpened, updateSidebar }}>
       {children}
-    </SidebarContext.Provider>
+    </MainSidebarContext.Provider>
   );
 };
 
