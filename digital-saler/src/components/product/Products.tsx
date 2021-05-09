@@ -38,6 +38,27 @@ const customStyles = {
     style: {
       minHeight: "35px",
     },
+    stripedStyle: {
+      backgroundColor: "#dbebdc",
+    },
+  },
+  header: {
+    style: {
+      fontSize: "22px",
+      minHeight: "56px",
+      paddingLeft: "16px",
+      paddingRight: "8px",
+    },
+  },
+  headRow: {
+    style: {
+      backgroundColor: "#384538",
+      minHeight: "42px",
+      borderBottomWidth: "1px",
+    },
+    denseStyle: {
+      minHeight: "32px",
+    },
   },
   headCells: {
     style: {
@@ -45,7 +66,10 @@ const customStyles = {
       paddingRight: "8px",
       fontSize: "23px",
       fontWeight: 600,
-      color: "#1b5e20",
+      color: "#fff",
+    },
+    activeSortStyle: {
+      color: "#fff",
     },
   },
   cells: {
@@ -88,6 +112,8 @@ export const Products: FC = (Props) => {
           pagination
           selectableRows
           customStyles={customStyles}
+          striped={true}
+          highlightOnHover={true}
         />
       </Card>
     </div>
