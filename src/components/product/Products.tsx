@@ -7,6 +7,8 @@ import {
   SidebarType,
   MainSidebarContext,
 } from "../context/SidebarContextProvider";
+import "../navbar/Button.css";
+import { Link } from "react-router-dom";
 
 const columns = [
   {
@@ -196,6 +198,12 @@ export const Products: FC = (Props) => {
       className="product-table"
       style={{ paddingLeft: sidebarOpened === true ? sidebarWidth : 0 }}
     >
+      <div className="action-bar">
+        <Link to="sign-up">
+          <button className="btn">Add Product</button>
+        </Link>
+      </div>
+
       <Card>
         <DataTable
           columns={columns}

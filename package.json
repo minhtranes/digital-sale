@@ -13,6 +13,8 @@
     "@types/react": "^17.0.4",
     "@types/react-dom": "^17.0.3",
     "@types/react-router": "^5.1.13",
+    "axios": "^0.21.1",
+    "bootstrap": "^5.0.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-data-table-component": "^6.11.7",
@@ -22,8 +24,7 @@
     "react-scripts": "4.0.3",
     "styled-components": "^5.2.3",
     "typescript": "^4.2.4",
-    "web-vitals": "^1.1.1",
-    "axios": "^0.21.1"
+    "web-vitals": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
