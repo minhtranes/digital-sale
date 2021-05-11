@@ -8,9 +8,17 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.action-bar {
-  padding-top: 15px;
-  margin-top: 15px;
-  width: 100%;
-  align-content: center;
+.actionbar {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-right: 5px;
+  margin: 2px 5px 2px 5px;
+  width: 98%;
+  background-color: rgb(221, 213, 228);
+  /* position: absolute; */
+  right: 0px;
+  border: 1px solid #717270;
+  text-align: right;
+  /* align-items: flex-end; */
+  /* padding: 10px; */
 }
