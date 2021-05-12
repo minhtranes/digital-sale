@@ -1,7 +1,13 @@
 import Card from "@material-ui/core/Card";
 import SortIcon from "@material-ui/icons/ArrowDownward";
 import axios from "axios";
-import React, { FC, useContext, useEffect, useState } from "react";
+import React, {
+  FC,
+  MouseEventHandler,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import DataTable from "react-data-table-component";
 import {
   SidebarType,
@@ -10,7 +16,7 @@ import {
 import "../navbar/Button.css";
 import { Link } from "react-router-dom";
 import "./Products.css";
-import { FaCog, FaOpencart } from "react-icons/fa";
+import { Popup } from "reactjs-popup";
 
 const columns = [
   {
@@ -195,15 +201,37 @@ export const Products: FC = (Props) => {
     console.log("Product selected" + product.id);
   };
 
+  const addProductFc = () => {
+    console.log("Mouse clicked!!");
+    return (
+      <Popup position="right center">
+        <div>Popup content here !!</div>
+      </Popup>
+    );
+  };
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
   return (
     <div
       className="product-table"
       style={{ paddingLeft: sidebarOpened === true ? sidebarWidth : 0 }}
     >
+      <Popup open={open} closeOnDocumentClick onClose={closeModal}>
+        <div className="modal">
+          <a className="close" onClick={closeModal}>
+            &times;
+          </a>
+          <span>Name</span>
+        </div>
+      </Popup>
+
       <div className="actionbar">
-        <Link to="product/add" style={{ right: "20px" }}>
+        <button className="btn" onClick={() => setOpen((o) => !o)}>
+          Add Product
+        </button>
+        {/* <Link to="" style={{ right: "20px" }} onClick={addProductFc}>
           <button className="btn">Add Product</button>
-        </Link>
+        </Link> */}
       </div>
 
       <Card>
