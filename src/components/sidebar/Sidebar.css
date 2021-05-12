@@ -1,0 +1,71 @@
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  transition: 350ms;
+  left: 0;
+  z-index: 10;
+}
+
+.sidebar-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.125rem;
+  text-decoration: none;
+  color: #ffffff;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+.sidebar-link :hover {
+  background-color: #1888ff;
+  border-radius: 5px;
+  transition: all 0.2s ease-out;
+}
+
+.sidebar-label {
+  margin-left: 1rem;
+  color: rgb(239, 247, 239);
+  font-weight: 400;
+}
+
+.sidebar-logo {
+  color: rgb(179, 190, 179);
+  font-weight: 400;
+  font-size: 50px;
+  align-items: center;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  padding-bottom: 40px;
+}
+
+.dropdown-link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 2.75rem;
+  font-size: 1.125rem;
+  padding-left: 3rem;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.dropdown-link a:hover {
+  background-color: #370bb3;
+  border-radius: 4px;
+  transition: all 0.2s ease-out;
+}
+
+.sidebar-sub-label {
+  margin-left: 1rem;
+  color: rgb(239, 247, 239);
+  font-weight: 100;
+  font-style: italic;
+}
+
+.overview {
+  display: flex;
+  align-items: center;
+}
