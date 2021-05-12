@@ -1,13 +1,7 @@
 import Card from "@material-ui/core/Card";
 import SortIcon from "@material-ui/icons/ArrowDownward";
 import axios from "axios";
-import React, {
-  FC,
-  MouseEventHandler,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import {
   SidebarType,
@@ -17,6 +11,8 @@ import "../navbar/Button.css";
 import { Link } from "react-router-dom";
 import "./Products.css";
 import { Popup } from "reactjs-popup";
+import { type } from "node:os";
+import "./AddProductForm.css";
 
 const columns = [
   {
@@ -167,9 +163,8 @@ export const Products: FC = (Props) => {
     content: [],
     totalElements: 0,
   });
-  const { sidebarOpened, sidebarWidth } = useContext<SidebarType>(
-    MainSidebarContext
-  );
+  const { sidebarOpened, sidebarWidth } =
+    useContext<SidebarType>(MainSidebarContext);
 
   const [paginationPerPage, setPaginationPerPage] = useState<number>(20);
 
@@ -221,7 +216,7 @@ export const Products: FC = (Props) => {
           <a className="close" onClick={closeModal}>
             &times;
           </a>
-          <span>Name</span>
+          <AddingProductView />
         </div>
       </Popup>
 
@@ -253,6 +248,72 @@ export const Products: FC = (Props) => {
           onRowDoubleClicked={editProduct}
         />
       </Card>
+    </div>
+  );
+};
+
+type AddingProduct = {
+  id: number;
+  idString: string;
+  name: string;
+  retailDepartment: string;
+  city: string;
+  phoneNumber: string;
+  currency: string;
+  businessAddress: string;
+  importPrice: number;
+  salePrice: number;
+  shippingAddress: string;
+  importDate: string;
+  expirationDate: string;
+  expired: boolean;
+};
+
+const AddingProductView: FC = (props) => {
+  const [addingProduct, setAddingProduct] = useState<AddingProduct>({
+    id: 0,
+    idString: "",
+    name: "",
+    retailDepartment: "",
+    city: "",
+    phoneNumber: "",
+    currency: "",
+    businessAddress: "",
+    importPrice: 0,
+    salePrice: 0,
+    shippingAddress: "",
+    importDate: "",
+    expirationDate: "",
+    expired: false,
+  });
+
+  const onValueChange = (e: React.FormEvent<HTMLInputElement>): void => {
+    // console.log(
+    //   "Editing field " +
+    //     e.currentTarget.name +
+    //     " with value " +
+    //     e.currentTarget.value
+    // );
+    setAddingProduct({
+      ...addingProduct,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+  };
+
+  return (
+    <div className="product-add">
+      <div className="product-add-header">Sample header</div>
+      <div>
+        <div className="product-add-field">
+          <label className="product-add-label">Name</label>
+          <input
+            type="text"
+            value={addingProduct.name}
+            name="name"
+            onChange={onValueChange}
+          />
+        </div>
+      </div>
     </div>
   );
 };
