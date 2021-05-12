@@ -8,10 +8,8 @@ import {
   MainSidebarContext,
 } from "../context/SidebarContextProvider";
 import "../navbar/Button.css";
-import { Link } from "react-router-dom";
 import "./Products.css";
 import { Popup } from "reactjs-popup";
-import { type } from "node:os";
 import "./AddProductForm.css";
 
 const columns = [
@@ -158,6 +156,23 @@ const inventoryRepository = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
+type AddingProduct = {
+  id: number;
+  idString: string;
+  name: string;
+  retailDepartment: string;
+  city: string;
+  phoneNumber: string;
+  currency: string;
+  businessAddress: string;
+  importPrice: number;
+  salePrice: number;
+  shippingAddress: string;
+  importDate: string;
+  expirationDate: string;
+  expired: boolean;
+};
+
 export const Products: FC = (Props) => {
   const [products, setProducts] = useState<ProductList>({
     content: [],
@@ -205,7 +220,34 @@ export const Products: FC = (Props) => {
     );
   };
   const [open, setOpen] = useState(false);
-  const closeModal = () => setOpen(false);
+  const closeModal = () => {
+    setOpen(false);
+  };
+
+  const [addingProduct, setAddingProduct] = useState<AddingProduct>({
+    id: 0,
+    idString: "",
+    name: "",
+    retailDepartment: "",
+    city: "",
+    phoneNumber: "",
+    currency: "",
+    businessAddress: "",
+    importPrice: 0,
+    salePrice: 0,
+    shippingAddress: "",
+    importDate: "",
+    expirationDate: "",
+    expired: false,
+  });
+
+  const onValueChange = (e: React.FormEvent<HTMLInputElement>): void => {
+    setAddingProduct({
+      ...addingProduct,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+  };
+
   return (
     <div
       className="product-table"
@@ -213,10 +255,24 @@ export const Products: FC = (Props) => {
     >
       <Popup open={open} closeOnDocumentClick onClose={closeModal}>
         <div className="modal">
-          <a className="close" onClick={closeModal}>
+          {/* <a className="close" onClick={closeModal}>
             &times;
-          </a>
-          <AddingProductView />
+          </a> */}
+          <div className="header">Import Product</div>
+          <div className="content">
+            <div>
+              <label className="product-add-label">Name</label>
+              <input
+                type="text"
+                value={addingProduct.name}
+                name="name"
+                onChange={onValueChange}
+              />
+            </div>
+          </div>
+          <div className="actions">
+            <button className="btn">Cancel</button>
+          </div>
         </div>
       </Popup>
 
@@ -224,9 +280,6 @@ export const Products: FC = (Props) => {
         <button className="btn" onClick={() => setOpen((o) => !o)}>
           Add Product
         </button>
-        {/* <Link to="" style={{ right: "20px" }} onClick={addProductFc}>
-          <button className="btn">Add Product</button>
-        </Link> */}
       </div>
 
       <Card>
@@ -248,72 +301,6 @@ export const Products: FC = (Props) => {
           onRowDoubleClicked={editProduct}
         />
       </Card>
-    </div>
-  );
-};
-
-type AddingProduct = {
-  id: number;
-  idString: string;
-  name: string;
-  retailDepartment: string;
-  city: string;
-  phoneNumber: string;
-  currency: string;
-  businessAddress: string;
-  importPrice: number;
-  salePrice: number;
-  shippingAddress: string;
-  importDate: string;
-  expirationDate: string;
-  expired: boolean;
-};
-
-const AddingProductView: FC = (props) => {
-  const [addingProduct, setAddingProduct] = useState<AddingProduct>({
-    id: 0,
-    idString: "",
-    name: "",
-    retailDepartment: "",
-    city: "",
-    phoneNumber: "",
-    currency: "",
-    businessAddress: "",
-    importPrice: 0,
-    salePrice: 0,
-    shippingAddress: "",
-    importDate: "",
-    expirationDate: "",
-    expired: false,
-  });
-
-  const onValueChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    // console.log(
-    //   "Editing field " +
-    //     e.currentTarget.name +
-    //     " with value " +
-    //     e.currentTarget.value
-    // );
-    setAddingProduct({
-      ...addingProduct,
-      [e.currentTarget.name]: e.currentTarget.value,
-    });
-  };
-
-  return (
-    <div className="product-add">
-      <div className="product-add-header">Sample header</div>
-      <div>
-        <div className="product-add-field">
-          <label className="product-add-label">Name</label>
-          <input
-            type="text"
-            value={addingProduct.name}
-            name="name"
-            onChange={onValueChange}
-          />
-        </div>
-      </div>
     </div>
   );
 };

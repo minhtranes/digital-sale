@@ -24,8 +24,8 @@
 .modal {
   font-size: 12px;
   background-color: #e7e9e6;
-  height: 700px;
-  width: 1000px;
+  /* height: 50%;
+  width: 50%; */
 }
 .modal > .header {
   width: 100%;
