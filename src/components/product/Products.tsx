@@ -222,6 +222,7 @@ export const Products: FC = (Props) => {
   const [open, setOpen] = useState(false);
   const closeModal = () => {
     setOpen(false);
+    console.log("Name " + addingProduct.name);
   };
 
   const [addingProduct, setAddingProduct] = useState<AddingProduct>({
@@ -261,6 +262,24 @@ export const Products: FC = (Props) => {
           <div className="header">Import Product</div>
           <div className="content">
             <div>
+              <label className="product-add-label">Id</label>
+              <input
+                type="text"
+                value={addingProduct.id}
+                name="id"
+                onChange={onValueChange}
+              />
+            </div>
+            <div>
+              <label className="product-add-label">Id (Text)</label>
+              <input
+                type="text"
+                value={addingProduct.idString}
+                name="idString"
+                onChange={onValueChange}
+              />
+            </div>
+            <div>
               <label className="product-add-label">Name</label>
               <input
                 type="text"
@@ -269,9 +288,38 @@ export const Products: FC = (Props) => {
                 onChange={onValueChange}
               />
             </div>
+            <div>
+              <label className="product-add-label">Retail Department</label>
+              <input
+                type="text"
+                value={addingProduct.retailDepartment}
+                name="retailDepartment"
+                onChange={onValueChange}
+              />
+            </div>
+            <div>
+              <label className="product-add-label">City</label>
+              <input
+                type="text"
+                value={addingProduct.city}
+                name="city"
+                onChange={onValueChange}
+              />
+            </div>
+            <div>
+              <label className="product-add-label">Phone Number</label>
+              <input
+                type="text"
+                value={addingProduct.phoneNumber}
+                name="phoneNumber"
+                onChange={onValueChange}
+              />
+            </div>
           </div>
           <div className="actions">
-            <button className="btn">Cancel</button>
+            <button className="btn" onClick={closeModal}>
+              Cancel
+            </button>
           </div>
         </div>
       </Popup>
