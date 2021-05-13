@@ -10,7 +10,7 @@ import {
 import "../navbar/Button.css";
 import "./Products.css";
 import { Popup } from "reactjs-popup";
-import "./AddProductForm.css";
+import "./form.css";
 
 const columns = [
   {
@@ -260,9 +260,9 @@ export const Products: FC = (Props) => {
             &times;
           </a> */}
           <div className="header">Import Product</div>
-          <div className="content">
-            <div>
-              <label className="product-add-label">Id</label>
+          <form className="content">
+            <div className="field">
+              <label>Id</label>
               <input
                 type="text"
                 value={addingProduct.id}
@@ -270,8 +270,8 @@ export const Products: FC = (Props) => {
                 onChange={onValueChange}
               />
             </div>
-            <div>
-              <label className="product-add-label">Id (Text)</label>
+            <div className="field">
+              <label>Id (Text)</label>
               <input
                 type="text"
                 value={addingProduct.idString}
@@ -279,8 +279,8 @@ export const Products: FC = (Props) => {
                 onChange={onValueChange}
               />
             </div>
-            <div>
-              <label className="product-add-label">Name</label>
+            <div className="field">
+              <label>Name</label>
               <input
                 type="text"
                 value={addingProduct.name}
@@ -288,8 +288,8 @@ export const Products: FC = (Props) => {
                 onChange={onValueChange}
               />
             </div>
-            <div>
-              <label className="product-add-label">Retail Department</label>
+            <div className="field">
+              <label>Retail Department</label>
               <input
                 type="text"
                 value={addingProduct.retailDepartment}
@@ -297,8 +297,8 @@ export const Products: FC = (Props) => {
                 onChange={onValueChange}
               />
             </div>
-            <div>
-              <label className="product-add-label">City</label>
+            <div className="field">
+              <label>City</label>
               <input
                 type="text"
                 value={addingProduct.city}
@@ -306,8 +306,8 @@ export const Products: FC = (Props) => {
                 onChange={onValueChange}
               />
             </div>
-            <div>
-              <label className="product-add-label">Phone Number</label>
+            <div className="field">
+              <label>Phone Number</label>
               <input
                 type="text"
                 value={addingProduct.phoneNumber}
@@ -315,10 +315,13 @@ export const Products: FC = (Props) => {
                 onChange={onValueChange}
               />
             </div>
-          </div>
+          </form>
           <div className="actions">
             <button className="btn" onClick={closeModal}>
               Cancel
+            </button>
+            <button className="btn" type="submit">
+              Save
             </button>
           </div>
         </div>

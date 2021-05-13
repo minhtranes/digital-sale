@@ -1,0 +1,21 @@
+.field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.field label {
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+  margin-right: 10px;
+}
+.field .error {
+  color: red;
+  margin-left: 3px;
+  font-size: 0.8em;
+}
+
+form button[type="submit"] {
+  margin-top: 5px;
+  margin-left: 103px;
+}
