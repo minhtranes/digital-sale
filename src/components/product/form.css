@@ -5,9 +5,13 @@
 }
 .field label {
   display: inline-block;
-  width: 100px;
+  width: 150px;
   text-align: right;
   margin-right: 10px;
+}
+.field input {
+  width: 250px;
+  font-size: medium;
 }
 .field .error {
   color: red;

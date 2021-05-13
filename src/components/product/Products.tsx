@@ -256,9 +256,6 @@ export const Products: FC = (Props) => {
     >
       <Popup open={open} closeOnDocumentClick onClose={closeModal}>
         <div className="modal">
-          {/* <a className="close" onClick={closeModal}>
-            &times;
-          </a> */}
           <div className="header">Import Product</div>
           <form className="content">
             <div className="field">
@@ -315,12 +312,79 @@ export const Products: FC = (Props) => {
                 onChange={onValueChange}
               />
             </div>
+            <div className="field">
+              <label>Currency</label>
+              <input
+                type="text"
+                value={addingProduct.currency}
+                name="currency"
+                onChange={onValueChange}
+              />
+            </div>
+            <div className="field">
+              <label>Business Address</label>
+              <input
+                type="text"
+                value={addingProduct.businessAddress}
+                name="businessAddress"
+                onChange={onValueChange}
+              />
+            </div>
+            <div className="field">
+              <label>Import Price</label>
+              <input
+                type="text"
+                value={addingProduct.importPrice}
+                name="importPrice"
+                onChange={onValueChange}
+              />
+            </div>
+            <div className="field">
+              <label>Sale Price</label>
+              <input
+                type="text"
+                value={addingProduct.salePrice}
+                name="salePrice"
+                onChange={onValueChange}
+              />
+            </div>
+            <div className="field">
+              <label>Shipping Address</label>
+              <input
+                type="text"
+                value={addingProduct.shippingAddress}
+                name="shippingAddress"
+                onChange={onValueChange}
+              />
+            </div>
+            <div className="field">
+              <label>Import Date</label>
+              <input
+                type="text"
+                value={addingProduct.importDate}
+                name="importDate"
+                onChange={onValueChange}
+              />
+            </div>
+            <div className="field">
+              <label>Expiration Date</label>
+              <input
+                type="text"
+                value={addingProduct.expirationDate}
+                name="expirationDate"
+                onChange={onValueChange}
+              />
+            </div>
           </form>
           <div className="actions">
-            <button className="btn" onClick={closeModal}>
+            <button
+              className="btn"
+              onClick={closeModal}
+              style={{ marginRight: "2px" }}
+            >
               Cancel
             </button>
-            <button className="btn" type="submit">
+            <button className="btn" type="submit" style={{ marginLeft: "2px" }}>
               Save
             </button>
           </div>
