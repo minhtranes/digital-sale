@@ -258,122 +258,129 @@ export const Products: FC = (Props) => {
         <div className="modal">
           <div className="header">Import Product</div>
           <form className="content">
-            <div className="field">
-              <label>Id</label>
-              <input
-                type="text"
-                value={addingProduct.id}
-                name="id"
-                onChange={onValueChange}
-              />
+            <div style={{ display: "inline-block" }}>
+              <div className="field">
+                <label>Id</label>
+                <input
+                  type="text"
+                  value={addingProduct.id}
+                  name="id"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Id (Text)</label>
+                <input
+                  type="text"
+                  value={addingProduct.idString}
+                  name="idString"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Name</label>
+                <input
+                  type="text"
+                  value={addingProduct.name}
+                  name="name"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Import Price</label>
+                <input
+                  type="text"
+                  value={addingProduct.importPrice}
+                  name="importPrice"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Sale Price</label>
+                <input
+                  type="text"
+                  value={addingProduct.salePrice}
+                  name="salePrice"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Import Date</label>
+                <input
+                  type="text"
+                  value={addingProduct.importDate}
+                  name="importDate"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Expiration Date</label>
+                <input
+                  type="text"
+                  value={addingProduct.expirationDate}
+                  name="expirationDate"
+                  onChange={onValueChange}
+                />
+              </div>
             </div>
-            <div className="field">
-              <label>Id (Text)</label>
-              <input
-                type="text"
-                value={addingProduct.idString}
-                name="idString"
-                onChange={onValueChange}
-              />
-            </div>
-            <div className="field">
-              <label>Name</label>
-              <input
-                type="text"
-                value={addingProduct.name}
-                name="name"
-                onChange={onValueChange}
-              />
-            </div>
-            <div className="field">
-              <label>Retail Department</label>
-              <input
-                type="text"
-                value={addingProduct.retailDepartment}
-                name="retailDepartment"
-                onChange={onValueChange}
-              />
-            </div>
-            <div className="field">
-              <label>City</label>
-              <input
-                type="text"
-                value={addingProduct.city}
-                name="city"
-                onChange={onValueChange}
-              />
-            </div>
-            <div className="field">
-              <label>Phone Number</label>
-              <input
-                type="text"
-                value={addingProduct.phoneNumber}
-                name="phoneNumber"
-                onChange={onValueChange}
-              />
-            </div>
-            <div className="field">
-              <label>Currency</label>
-              <input
-                type="text"
-                value={addingProduct.currency}
-                name="currency"
-                onChange={onValueChange}
-              />
-            </div>
-            <div className="field">
-              <label>Business Address</label>
-              <input
-                type="text"
-                value={addingProduct.businessAddress}
-                name="businessAddress"
-                onChange={onValueChange}
-              />
-            </div>
-            <div className="field">
-              <label>Import Price</label>
-              <input
-                type="text"
-                value={addingProduct.importPrice}
-                name="importPrice"
-                onChange={onValueChange}
-              />
-            </div>
-            <div className="field">
-              <label>Sale Price</label>
-              <input
-                type="text"
-                value={addingProduct.salePrice}
-                name="salePrice"
-                onChange={onValueChange}
-              />
-            </div>
-            <div className="field">
-              <label>Shipping Address</label>
-              <input
-                type="text"
-                value={addingProduct.shippingAddress}
-                name="shippingAddress"
-                onChange={onValueChange}
-              />
-            </div>
-            <div className="field">
-              <label>Import Date</label>
-              <input
-                type="text"
-                value={addingProduct.importDate}
-                name="importDate"
-                onChange={onValueChange}
-              />
-            </div>
-            <div className="field">
-              <label>Expiration Date</label>
-              <input
-                type="text"
-                value={addingProduct.expirationDate}
-                name="expirationDate"
-                onChange={onValueChange}
-              />
+            <div style={{ display: "inline-block" }}>
+              <div className="field">
+                <label>Retail Department</label>
+                <input
+                  type="text"
+                  value={addingProduct.retailDepartment}
+                  name="retailDepartment"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>City</label>
+                <input
+                  type="text"
+                  value={addingProduct.city}
+                  name="city"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Phone Number</label>
+                <input
+                  type="text"
+                  value={addingProduct.phoneNumber}
+                  name="phoneNumber"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Currency</label>
+                <input
+                  type="text"
+                  value={addingProduct.currency}
+                  name="currency"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Business Address</label>
+                <input
+                  type="text"
+                  value={addingProduct.businessAddress}
+                  name="businessAddress"
+                  onChange={onValueChange}
+                  style={{ width: "500px" }}
+                />
+              </div>
+
+              <div className="field">
+                <label>Shipping Address</label>
+                <input
+                  type="text"
+                  value={addingProduct.shippingAddress}
+                  name="shippingAddress"
+                  onChange={onValueChange}
+                  style={{ width: "500px" }}
+                />
+              </div>
             </div>
           </form>
           <div className="actions">
