@@ -1,16 +1,21 @@
 .field {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .field label {
   display: inline-block;
   width: 150px;
   text-align: right;
   margin-right: 10px;
-  color: aliceblue;
+  color: rgb(0, 0, 0);
 }
 .field input {
+  width: 250px;
+  font-size: medium;
+  border-radius: 3px;
+}
+.field select {
   width: 250px;
   font-size: medium;
 }

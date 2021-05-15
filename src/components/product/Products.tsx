@@ -249,6 +249,13 @@ export const Products: FC = (Props) => {
     });
   };
 
+  const handleDropdownChange = (e: React.FormEvent<HTMLSelectElement>) => {
+    setAddingProduct({
+      ...addingProduct,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+  };
+
   return (
     <div
       className="product-table"
@@ -323,7 +330,9 @@ export const Products: FC = (Props) => {
                 />
               </div>
             </div>
-            <div style={{ display: "inline-block" }}>
+            <div
+              style={{ display: "inline-block", alignContent: "flex-start" }}
+            >
               <div className="field">
                 <label>Retail Department</label>
                 <input
@@ -335,12 +344,15 @@ export const Products: FC = (Props) => {
               </div>
               <div className="field">
                 <label>City</label>
-                <input
-                  type="text"
-                  value={addingProduct.city}
+                <select
+                  defaultValue={addingProduct.city}
                   name="city"
-                  onChange={onValueChange}
-                />
+                  onChange={handleDropdownChange}
+                >
+                  <option value="Orange">Orange</option>
+                  <option value="Radish">Radish</option>
+                  <option value="Cherry">Cherry</option>
+                </select>
               </div>
               <div className="field">
                 <label>Phone Number</label>
