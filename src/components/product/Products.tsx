@@ -11,6 +11,7 @@ import "../navbar/Button.css";
 import "./Products.css";
 import { Popup } from "reactjs-popup";
 import "./form.css";
+import { cityRepository } from "../repository/CityRepository";
 
 const columns = [
   {
@@ -256,6 +257,8 @@ export const Products: FC = (Props) => {
     });
   };
 
+  const [cities, setCities] = useState<string[]>(cityRepository);
+
   return (
     <div
       className="product-table"
@@ -349,9 +352,11 @@ export const Products: FC = (Props) => {
                   name="city"
                   onChange={handleDropdownChange}
                 >
-                  <option value="Orange">Orange</option>
-                  <option value="Radish">Radish</option>
-                  <option value="Cherry">Cherry</option>
+                  {cities.map((city, index) => (
+                    <option key={index} value={city}>
+                      {city}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="field">
