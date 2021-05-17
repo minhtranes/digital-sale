@@ -1,3 +1,3 @@
-export const cityRepository = (): string[] => {
+export const defaultCities = (): string[] => {
   return ["Ho Chi Minh"];
 };

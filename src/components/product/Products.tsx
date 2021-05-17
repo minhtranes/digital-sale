@@ -11,7 +11,7 @@ import "../navbar/Button.css";
 import "./Products.css";
 import { Popup } from "reactjs-popup";
 import "./form.css";
-import { cityRepository } from "../repository/CityRepository";
+import { defaultCities } from "../config/ProductConfiguration";
 
 const columns = [
   {
@@ -257,7 +257,7 @@ export const Products: FC = (Props) => {
     });
   };
 
-  const [cities, setCities] = useState<string[]>(cityRepository);
+  const [cities, setCities] = useState<string[]>(defaultCities);
 
   return (
     <div
