@@ -20,6 +20,7 @@
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-data-table-component": "^6.11.7",
+    "react-datepicker": "^3.8.0",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
@@ -59,8 +60,12 @@
     ]
   },
   "devDependencies": {
+    "@types/react-datepicker": "^3.1.8",
     "@types/react-icons": "^3.0.0",
     "@types/react-router-dom": "^5.1.7",
-    "@types/styled-components": "^5.1.9"
+    "@types/styled-components": "^5.1.9",
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.36",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.4"
   }
 }
