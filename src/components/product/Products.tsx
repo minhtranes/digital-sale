@@ -1,22 +1,17 @@
 import Card from "@material-ui/core/Card";
 import SortIcon from "@material-ui/icons/ArrowDownward";
 import axios from "axios";
-import React, {
-  FC,
-  MouseEventHandler,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import {
   SidebarType,
   MainSidebarContext,
 } from "../context/SidebarContextProvider";
 import "../navbar/Button.css";
-import { Link } from "react-router-dom";
 import "./Products.css";
 import { Popup } from "reactjs-popup";
+import "./form.css";
+import { defaultCities } from "../config/ProductConfiguration";
 
 const columns = [
   {
@@ -162,14 +157,30 @@ const inventoryRepository = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
+type AddingProduct = {
+  id: number;
+  idString: string;
+  name: string;
+  retailDepartment: string;
+  city: string;
+  phoneNumber: string;
+  currency: string;
+  businessAddress: string;
+  importPrice: number;
+  salePrice: number;
+  shippingAddress: string;
+  importDate: string;
+  expirationDate: string;
+  expired: boolean;
+};
+
 export const Products: FC = (Props) => {
   const [products, setProducts] = useState<ProductList>({
     content: [],
     totalElements: 0,
   });
-  const { sidebarOpened, sidebarWidth } = useContext<SidebarType>(
-    MainSidebarContext
-  );
+  const { sidebarOpened, sidebarWidth } =
+    useContext<SidebarType>(MainSidebarContext);
 
   const [paginationPerPage, setPaginationPerPage] = useState<number>(20);
 
@@ -210,7 +221,44 @@ export const Products: FC = (Props) => {
     );
   };
   const [open, setOpen] = useState(false);
-  const closeModal = () => setOpen(false);
+  const closeModal = () => {
+    setOpen(false);
+    console.log("Name " + addingProduct.name);
+  };
+
+  const [addingProduct, setAddingProduct] = useState<AddingProduct>({
+    id: 0,
+    idString: "",
+    name: "",
+    retailDepartment: "",
+    city: "",
+    phoneNumber: "",
+    currency: "",
+    businessAddress: "",
+    importPrice: 0,
+    salePrice: 0,
+    shippingAddress: "",
+    importDate: "",
+    expirationDate: "",
+    expired: false,
+  });
+
+  const onValueChange = (e: React.FormEvent<HTMLInputElement>): void => {
+    setAddingProduct({
+      ...addingProduct,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+  };
+
+  const handleDropdownChange = (e: React.FormEvent<HTMLSelectElement>) => {
+    setAddingProduct({
+      ...addingProduct,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+  };
+
+  const [cities, setCities] = useState<string[]>(defaultCities);
+
   return (
     <div
       className="product-table"
@@ -218,10 +266,152 @@ export const Products: FC = (Props) => {
     >
       <Popup open={open} closeOnDocumentClick onClose={closeModal}>
         <div className="modal">
-          <a className="close" onClick={closeModal}>
-            &times;
-          </a>
-          <span>Name</span>
+          <div className="header">Import Product</div>
+          <form className="content">
+            <div style={{ display: "inline-block" }}>
+              <div className="field">
+                <label>Id</label>
+                <input
+                  type="text"
+                  value={addingProduct.id}
+                  name="id"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Id (Text)</label>
+                <input
+                  type="text"
+                  value={addingProduct.idString}
+                  name="idString"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Name</label>
+                <input
+                  type="text"
+                  value={addingProduct.name}
+                  name="name"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Import Price</label>
+                <input
+                  type="text"
+                  value={addingProduct.importPrice}
+                  name="importPrice"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Sale Price</label>
+                <input
+                  type="text"
+                  value={addingProduct.salePrice}
+                  name="salePrice"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Import Date</label>
+                <input
+                  type="text"
+                  value={addingProduct.importDate}
+                  name="importDate"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Expiration Date</label>
+                <input
+                  type="text"
+                  value={addingProduct.expirationDate}
+                  name="expirationDate"
+                  onChange={onValueChange}
+                />
+              </div>
+            </div>
+            <div
+              style={{ display: "inline-block", alignContent: "flex-start" }}
+            >
+              <div className="field">
+                <label>Retail Department</label>
+                <input
+                  type="text"
+                  value={addingProduct.retailDepartment}
+                  name="retailDepartment"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>City</label>
+                <select
+                  defaultValue={addingProduct.city}
+                  name="city"
+                  onChange={handleDropdownChange}
+                >
+                  {cities.map((city, index) => (
+                    <option key={index} value={city}>
+                      {city}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="field">
+                <label>Phone Number</label>
+                <input
+                  type="text"
+                  value={addingProduct.phoneNumber}
+                  name="phoneNumber"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Currency</label>
+                <input
+                  type="text"
+                  value={addingProduct.currency}
+                  name="currency"
+                  onChange={onValueChange}
+                />
+              </div>
+              <div className="field">
+                <label>Business Address</label>
+                <input
+                  type="text"
+                  value={addingProduct.businessAddress}
+                  name="businessAddress"
+                  onChange={onValueChange}
+                  style={{ width: "500px" }}
+                />
+              </div>
+
+              <div className="field">
+                <label>Shipping Address</label>
+                <input
+                  type="text"
+                  value={addingProduct.shippingAddress}
+                  name="shippingAddress"
+                  onChange={onValueChange}
+                  style={{ width: "500px" }}
+                />
+              </div>
+            </div>
+          </form>
+          <div className="actions">
+            <button
+              className="btn"
+              onClick={closeModal}
+              style={{ marginRight: "2px" }}
+            >
+              Cancel
+            </button>
+            <button className="btn" type="submit" style={{ marginLeft: "2px" }}>
+              Save
+            </button>
+          </div>
         </div>
       </Popup>
 
@@ -229,9 +419,6 @@ export const Products: FC = (Props) => {
         <button className="btn" onClick={() => setOpen((o) => !o)}>
           Add Product
         </button>
-        {/* <Link to="" style={{ right: "20px" }} onClick={addProductFc}>
-          <button className="btn">Add Product</button>
-        </Link> */}
       </div>
 
       <Card>
