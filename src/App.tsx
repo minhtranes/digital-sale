@@ -33,7 +33,7 @@ export default function App() {
                           <Fragment key={item}>
                             {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                             <a
-                              href="https://github.com"
+                              href="http://localhost:3000"
                               className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
                             >
                               {item}
@@ -42,7 +42,7 @@ export default function App() {
                         ) : (
                           <a
                             key={item}
-                            href="https://github.com"
+                            href="http://localhost:3000"
                             className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                           >
                             {item}
@@ -91,7 +91,7 @@ export default function App() {
                                 <Menu.Item key={item}>
                                   {({ active }) => (
                                     <a
-                                      href="https://github.com"
+                                      href="http://localhost:3000"
                                       className={classNames(
                                         active ? "bg-gray-100" : "",
                                         "block px-4 py-2 text-sm text-gray-700"
@@ -130,7 +130,7 @@ export default function App() {
                     <Fragment key={item}>
                       {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                       <a
-                        href="https://github.com"
+                        href="http://localhost:3000"
                         className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
                       >
                         {item}
@@ -139,7 +139,7 @@ export default function App() {
                   ) : (
                     <a
                       key={item}
-                      href="https://github.com"
+                      href="http://localhost:3000"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     >
                       {item}
@@ -173,7 +173,7 @@ export default function App() {
                   {profile.map((item) => (
                     <a
                       key={item}
-                      href="https://github.com"
+                      href="http://localhost:3000"
                       className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
                     >
                       {item}
