@@ -4,6 +4,22 @@ import "./tailwindcss/tailwind.css";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  Configurations,
+  Order,
+  Overview,
+  Revenue,
+  Users,
+  History,
+  ContactUs,
+  Home,
+  Services,
+  Marketing,
+  SignUp,
+  Consulting,
+} from "./pages/Overviews";
+
 const navigation = ["Dashboard", "Team", "Projects", "Calendar", "Reports"];
 const profile = ["Your Profile", "Settings", "Sign out"];
 function classNames(...classes: string[]) {
@@ -818,8 +834,32 @@ export default function App() {
         {/* Remove class [ h-64 ] when adding a card block */}
         <div className="container mx-auto py-0 md:w-5/5 w-12/12 pl-2 flex flex-col">
           {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
-          <div className="w-full h-full rounded border-dashed border-2 border-gray-300 shadow-xl">
+          <div className="w-full h-full rounded-md border-dashed border-2 border-gray-300 shadow-xl">
             {/* Place your content here */}
+            <Router>
+              <Switch>
+                <Route path="/overview" component={Overview} exact></Route>
+                <Route path="/overview/users" component={Users} exact></Route>
+                <Route
+                  path="/overview/revenue"
+                  component={Revenue}
+                  exact
+                ></Route>
+                <Route path="/order" component={Order} exact></Route>
+                <Route path="/history" component={History} exact></Route>
+                <Route
+                  path="/configurations"
+                  component={Configurations}
+                  exact
+                ></Route>
+
+                <Route path="/services" component={Services} />
+                <Route path="/contact-us" component={ContactUs} />
+                <Route path="/sign-up" component={SignUp} />
+                <Route path="/marketing" component={Marketing} />
+                <Route path="/consulting" component={Consulting} />
+              </Switch>
+            </Router>
           </div>
         </div>
       </div>
