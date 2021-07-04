@@ -20,7 +20,7 @@ import {
   Consulting,
 } from "./pages/Overviews";
 
-const navigation = ["Dashboard", "Team", "Projects", "Calendar", "Reports"];
+const navigation = ["Dashboard", "Inventory", "Reports"];
 const profile = ["Your Profile", "Settings", "Sign out"];
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
