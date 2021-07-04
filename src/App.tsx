@@ -46,7 +46,7 @@ export default function App() {
   return (
     <div className="h-screen flex flex-col">
       {/* Navbar starts */}
-      <Disclosure as="nav" className="bg-gray-800">
+      <Disclosure as="nav" className="bg-gray-800 mx-2 rounded-md shadow-xl">
         {({ open }) => (
           <>
             <div className="px-8 sm:px-6 lg:px-8">
