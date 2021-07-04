@@ -217,10 +217,10 @@ export default function App() {
       </Disclosure>
       {/* Navbar ends */}
 
-      <div className="flex flex-no-wrap h-full">
+      <div className="flex flex-no-wrap h-full p-2">
         {/* Sidebar starts */}
         {/* Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] */}
-        <div className="w-64  bg-gray-800 shadow md:h-full justify-between hidden sm:flex flex-col">
+        <div className="w-64  bg-gray-800  md:h-full justify-between hidden sm:flex flex-col rounded-md shadow-xl">
           <div className="px-8">
             {/* <div className="h-16 w-full flex items-center">
               <svg
@@ -395,7 +395,7 @@ export default function App() {
                 </div>
               </li>
             </ul>
-            <div className="flex justify-center mt-48 mb-4 w-full">
+            <div className="flex justify-center mt-40 mb-4 w-full">
               <div className="relative ">
                 <div className="text-gray-500 absolute ml-4 inset-0 m-auto w-4 h-4">
                   <svg
