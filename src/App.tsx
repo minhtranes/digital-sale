@@ -816,7 +816,7 @@ export default function App() {
         </div>
         {/* Sidebar ends */}
         {/* Remove class [ h-64 ] when adding a card block */}
-        <div className="container mx-auto py-0 md:w-4/5 w-11/12 px-0 flex flex-col">
+        <div className="container mx-auto py-0 md:w-5/5 w-12/12 pl-2 flex flex-col">
           {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
           <div className="w-full h-full rounded border-dashed border-2 border-gray-300 shadow-xl">
             {/* Place your content here */}
