@@ -28,7 +28,7 @@ export default function App() {
   }
 
   return (
-    <div>
+    <div className="h-screen flex flex-col">
       {/* Navbar starts */}
       <Disclosure as="nav" className="bg-gray-800">
         {({ open }) => (
@@ -217,10 +217,10 @@ export default function App() {
       </Disclosure>
       {/* Navbar ends */}
 
-      <div className="flex flex-no-wrap">
+      <div className="flex flex-no-wrap h-full">
         {/* Sidebar starts */}
         {/* Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] */}
-        <div className="w-64 absolute sm:relative bg-gray-800 shadow md:h-full flex-col justify-between hidden sm:flex">
+        <div className="w-64  bg-gray-800 shadow md:h-full justify-between hidden sm:flex flex-col">
           <div className="px-8">
             {/* <div className="h-16 w-full flex items-center">
               <svg
