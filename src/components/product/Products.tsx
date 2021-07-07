@@ -427,7 +427,7 @@ export const Products: FC = (Props) => {
           Add Product
         </button>
       </div>
-      <div className="max-w-full">
+      <div className=" h-screen overflow-scroll">
         <DataTable
           columns={columns}
           data={products.content}

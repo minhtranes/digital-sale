@@ -46,7 +46,7 @@ export default function App() {
 
   return (
     <Router>
-      <div className="h-screen flex flex-col">
+      <div className="flex flex-col h-screen ">
         {/* Navbar starts */}
         <Disclosure as="nav" className="bg-gray-800 mx-2 rounded-md shadow-xl">
           {({ open }) => (
@@ -238,7 +238,7 @@ export default function App() {
         </Disclosure>
         {/* Navbar ends */}
 
-        <div className="flex h-full p-2">
+        <div className="flex h-screen w-screen p-2">
           {/* Sidebar starts */}
           {/* Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] */}
           <div className="w-64  bg-gray-800  md:h-full justify-between hidden sm:flex flex-col rounded-md shadow-xl">
@@ -256,7 +256,7 @@ export default function App() {
                 />
               </svg>
             </div> */}
-              <ul className="mt-5">
+              <ul className="mt-5 w-48">
                 <li className="flex w-full justify-between text-gray-300 hover:text-gray-500 cursor-pointer items-center mb-6">
                   <div className="flex items-center">
                     <svg
@@ -846,9 +846,9 @@ export default function App() {
           </div>
           {/* Sidebar ends */}
           {/* Remove class [ h-64 ] when adding a card block */}
-          <div className="container mx-auto py-0 md:w-5/5 w-12/12 pl-2 flex flex-col">
+          <div className="flex flex-col py-0 pl-2 w-full">
             {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
-            <div className="w-full h-full rounded-md border-dashed border-2 border-gray-300 shadow-xl">
+            <div className="rounded-md border-dashed border-2 border-gray-300 shadow-xl">
               {/* Place your content here */}
               <Switch>
                 <Route path="/overview" component={Overview} exact></Route>
