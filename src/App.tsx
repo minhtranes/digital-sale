@@ -19,6 +19,7 @@ import {
   SignUp,
   Consulting,
 } from "./pages/Overviews";
+import { Products } from "./components/product/Products";
 
 const navigation = ["Dashboard", "Inventory", "Reports"];
 const profile = ["Your Profile", "Settings", "Sign out"];
@@ -237,7 +238,7 @@ export default function App() {
         </Disclosure>
         {/* Navbar ends */}
 
-        <div className="flex flex-no-wrap h-full p-2">
+        <div className="flex h-full p-2">
           {/* Sidebar starts */}
           {/* Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] */}
           <div className="w-64  bg-gray-800  md:h-full justify-between hidden sm:flex flex-col rounded-md shadow-xl">
@@ -395,7 +396,9 @@ export default function App() {
                       <polyline points="4 12 12 16 20 12" />
                       <polyline points="4 16 12 20 20 16" />
                     </svg>
-                    <span className="text-sm  ml-2">Inventory</span>
+                    <Link to="/products" className="text-sm ml-2">
+                      Inventory
+                    </Link>
                   </div>
                 </li>
                 <li className="flex w-full justify-between text-gray-600 hover:text-gray-500 cursor-pointer items-center">
@@ -862,7 +865,7 @@ export default function App() {
                   component={Configurations}
                   exact
                 ></Route>
-
+                <Route path="/products" component={Products} />
                 <Route path="/services" component={Services} />
                 <Route path="/contact-us" component={ContactUs} />
                 <Route path="/sign-up" component={SignUp} />

@@ -1,4 +1,3 @@
-import Card from "@material-ui/core/Card";
 import SortIcon from "@material-ui/icons/ArrowDownward";
 import axios from "axios";
 import React, { FC, useContext, useEffect, useState } from "react";
@@ -12,17 +11,21 @@ import "./Products.css";
 import { Popup } from "reactjs-popup";
 import "./form.css";
 import { defaultCities } from "../config/ProductConfiguration";
+import "../../tailwindcss/tailwind.css";
 
 const columns = [
   {
     name: "Id",
     selector: "id",
     sortable: true,
+    width: "50px",
   },
   {
     name: "IdS",
     selector: "idString",
     sortable: true,
+    minWidth: "5px",
+    maxWidth: "250px",
   },
   {
     name: "Name",
@@ -88,7 +91,7 @@ const columns = [
 const customStyles = {
   rows: {
     style: {
-      minHeight: "35px",
+      minHeight: "5px",
     },
     stripedStyle: {
       backgroundColor: "#dbebdc",
@@ -96,28 +99,30 @@ const customStyles = {
   },
   header: {
     style: {
-      fontSize: "22px",
+      fontSize: "16px",
       minHeight: "1px",
-      paddingLeft: "16px",
-      paddingRight: "8px",
+      paddingLeft: "2px",
+      paddingRight: "2px",
     },
   },
   headRow: {
     style: {
       backgroundColor: "#384538",
-      minHeight: "42px",
+      minHeight: "1px",
       borderBottomWidth: "1px",
+      paddingTop: "4px",
+      paddingBottom: "4px",
     },
     denseStyle: {
-      minHeight: "32px",
+      minHeight: "5px",
     },
   },
   headCells: {
     style: {
-      paddingLeft: "8px",
-      paddingRight: "8px",
-      fontSize: "20px",
-      fontWeight: 600,
+      paddingLeft: "1px",
+      paddingRight: "1px",
+      fontSize: "14px",
+      fontWeight: 500,
       color: "#fff",
     },
     activeSortStyle: {
@@ -126,9 +131,11 @@ const customStyles = {
   },
   cells: {
     style: {
-      paddingLeft: "8px",
-      paddingRight: "8px",
+      paddingLeft: "1px",
+      paddingRight: "1px",
       fontSize: "16px",
+      paddingTop: "4px",
+      paddingBottom: "4px",
     },
   },
 };
@@ -260,11 +267,8 @@ export const Products: FC = (Props) => {
   const [cities, setCities] = useState<string[]>(defaultCities);
 
   return (
-    <div
-      className="product-table"
-      style={{ paddingLeft: sidebarOpened === true ? sidebarWidth : 0 }}
-    >
-      <Popup open={open} closeOnDocumentClick onClose={closeModal}>
+    <div className="flex flex-col">
+      {/* <Popup open={open} closeOnDocumentClick onClose={closeModal}>
         <div className="modal">
           <div className="header">Import Product</div>
           <form className="content">
@@ -413,15 +417,17 @@ export const Products: FC = (Props) => {
             </button>
           </div>
         </div>
-      </Popup>
+      </Popup> */}
 
-      <div className="actionbar">
-        <button className="btn" onClick={() => setOpen((o) => !o)}>
+      <div className="flex px-2 justify-between py-1">
+        <button
+          className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md shadow-sm text-base font-sm text-white bg-indigo-600 hover:bg-indigo-700"
+          onClick={() => setOpen((o) => !o)}
+        >
           Add Product
         </button>
       </div>
-
-      <Card>
+      <div className="max-w-full">
         <DataTable
           columns={columns}
           data={products.content}
@@ -430,8 +436,8 @@ export const Products: FC = (Props) => {
           pagination
           selectableRows
           customStyles={customStyles}
-          striped={true}
-          // paginationServer
+          striped={false}
+          responsive={false}
           paginationTotalRows={products.totalElements}
           highlightOnHover={true}
           onChangePage={handlePageChange}
@@ -439,7 +445,7 @@ export const Products: FC = (Props) => {
           paginationPerPage={paginationPerPage}
           onRowDoubleClicked={editProduct}
         />
-      </Card>
+      </div>
     </div>
   );
 };
