@@ -18,6 +18,7 @@ const columns = [
     name: "Id",
     selector: "id",
     sortable: true,
+    width: "48px",
   },
   {
     name: "IdS",
@@ -44,21 +45,21 @@ const columns = [
     selector: "phoneNumber",
     sortable: false,
   },
-  // {
-  //   name: "Currency",
-  //   selector: "currency",
-  //   sortable: false,
-  // },
+  {
+    name: "Currency",
+    selector: "currency",
+    sortable: false,
+  },
   // {
   //   name: "Business Address",
   //   selector: "curbusinessAddressrency",
   //   sortable: false,
   // },
-  // {
-  //   name: "Import Price",
-  //   selector: "importPrice",
-  //   sortable: false,
-  // },
+  {
+    name: "Import Price",
+    selector: "importPrice",
+    sortable: false,
+  },
   // {
   //   name: "Sale Price",
   //   selector: "salePrice",
@@ -424,7 +425,7 @@ export const Products: FC = (Props) => {
           Add Product
         </button>
       </div>
-      <div className="w-full h-full overflow-scroll">
+      <div className="w-full h-full overflow-hidden">
         <DataTable
           columns={columns}
           data={products.content}
@@ -434,7 +435,7 @@ export const Products: FC = (Props) => {
           selectableRows
           customStyles={customStyles}
           striped={false}
-          responsive={false}
+          responsive={true}
           paginationTotalRows={products.totalElements}
           highlightOnHover={true}
           onChangePage={handlePageChange}
