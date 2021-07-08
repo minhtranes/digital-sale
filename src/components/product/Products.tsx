@@ -18,14 +18,11 @@ const columns = [
     name: "Id",
     selector: "id",
     sortable: true,
-    width: "50px",
   },
   {
     name: "IdS",
     selector: "idString",
     sortable: true,
-    minWidth: "5px",
-    maxWidth: "250px",
   },
   {
     name: "Name",
@@ -47,46 +44,46 @@ const columns = [
     selector: "phoneNumber",
     sortable: false,
   },
-  {
-    name: "Currency",
-    selector: "currency",
-    sortable: false,
-  },
-  {
-    name: "Business Address",
-    selector: "curbusinessAddressrency",
-    sortable: false,
-  },
-  {
-    name: "Import Price",
-    selector: "importPrice",
-    sortable: false,
-  },
-  {
-    name: "Sale Price",
-    selector: "salePrice",
-    sortable: false,
-  },
-  {
-    name: "Shipping Address",
-    selector: "shippingAddress",
-    sortable: false,
-  },
-  {
-    name: "Import Date",
-    selector: "importDate",
-    sortable: false,
-  },
-  {
-    name: "Expiration Date",
-    selector: "expirationDate",
-    sortable: false,
-  },
-  {
-    name: "Expired",
-    selector: "expired",
-    sortable: false,
-  },
+  // {
+  //   name: "Currency",
+  //   selector: "currency",
+  //   sortable: false,
+  // },
+  // {
+  //   name: "Business Address",
+  //   selector: "curbusinessAddressrency",
+  //   sortable: false,
+  // },
+  // {
+  //   name: "Import Price",
+  //   selector: "importPrice",
+  //   sortable: false,
+  // },
+  // {
+  //   name: "Sale Price",
+  //   selector: "salePrice",
+  //   sortable: false,
+  // },
+  // {
+  //   name: "Shipping Address",
+  //   selector: "shippingAddress",
+  //   sortable: false,
+  // },
+  // {
+  //   name: "Import Date",
+  //   selector: "importDate",
+  //   sortable: false,
+  // },
+  // {
+  //   name: "Expiration Date",
+  //   selector: "expirationDate",
+  //   sortable: false,
+  // },
+  // {
+  //   name: "Expired",
+  //   selector: "expired",
+  //   sortable: false,
+  // },
 ];
 const customStyles = {
   rows: {
@@ -189,7 +186,7 @@ export const Products: FC = (Props) => {
   const { sidebarOpened, sidebarWidth } =
     useContext<SidebarType>(MainSidebarContext);
 
-  const [paginationPerPage, setPaginationPerPage] = useState<number>(20);
+  const [paginationPerPage, setPaginationPerPage] = useState<number>(10);
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -267,7 +264,7 @@ export const Products: FC = (Props) => {
   const [cities, setCities] = useState<string[]>(defaultCities);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-full">
       {/* <Popup open={open} closeOnDocumentClick onClose={closeModal}>
         <div className="modal">
           <div className="header">Import Product</div>
@@ -427,7 +424,7 @@ export const Products: FC = (Props) => {
           Add Product
         </button>
       </div>
-      <div className=" h-screen overflow-scroll">
+      <div className="w-full h-full overflow-scroll">
         <DataTable
           columns={columns}
           data={products.content}

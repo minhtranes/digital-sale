@@ -846,33 +846,25 @@ export default function App() {
           </div>
           {/* Sidebar ends */}
           {/* Remove class [ h-64 ] when adding a card block */}
-          <div className="flex flex-col py-0 pl-2 w-full">
+          <div className="flex flex-col py-0 pl-2 w-full rounded-md border-dashed border-2 border-gray-300 shadow-xl">
             {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
-            <div className="rounded-md border-dashed border-2 border-gray-300 shadow-xl">
-              {/* Place your content here */}
-              <Switch>
-                <Route path="/overview" component={Overview} exact></Route>
-                <Route path="/overview/users" component={Users} exact></Route>
-                <Route
-                  path="/overview/revenue"
-                  component={Revenue}
-                  exact
-                ></Route>
-                <Route path="/order" component={Order} exact></Route>
-                <Route path="/history" component={History} exact></Route>
-                <Route
-                  path="/settings"
-                  component={Configurations}
-                  exact
-                ></Route>
-                <Route path="/products" component={Products} />
-                <Route path="/services" component={Services} />
-                <Route path="/contact-us" component={ContactUs} />
-                <Route path="/sign-up" component={SignUp} />
-                <Route path="/marketing" component={Marketing} />
-                <Route path="/consulting" component={Consulting} />
-              </Switch>
-            </div>
+            {/* <div className="rounded-md border-dashed border-2 border-gray-300 shadow-xl"> */}
+            {/* Place your content here */}
+            <Switch>
+              <Route path="/overview" component={Overview} exact></Route>
+              <Route path="/overview/users" component={Users} exact></Route>
+              <Route path="/overview/revenue" component={Revenue} exact></Route>
+              <Route path="/order" component={Order} exact></Route>
+              <Route path="/history" component={History} exact></Route>
+              <Route path="/settings" component={Configurations} exact></Route>
+              <Route path="/products" component={Products} />
+              <Route path="/services" component={Services} />
+              <Route path="/contact-us" component={ContactUs} />
+              <Route path="/sign-up" component={SignUp} />
+              <Route path="/marketing" component={Marketing} />
+              <Route path="/consulting" component={Consulting} />
+            </Switch>
+            {/* </div> */}
           </div>
         </div>
       </div>
