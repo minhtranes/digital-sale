@@ -196,7 +196,7 @@ export const Products: FC = (Props) => {
   const { beginEditProduct } = bindActionCreators(actionCreators, dispatch);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full w-full bg-gray-400 rounded">
       <ProductDetail />
       <div className="flex px-2 justify-between py-1">
         <button
