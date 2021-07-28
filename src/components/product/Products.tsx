@@ -12,17 +12,17 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 
 const columns = [
-  {
-    name: "Id",
-    selector: "id",
-    sortable: true,
-    width: "48px",
-  },
-  {
-    name: "IdS",
-    selector: "idString",
-    sortable: true,
-  },
+  // {
+  //   name: "Id",
+  //   selector: "id",
+  //   sortable: true,
+  //   width: "48px",
+  // },
+  // {
+  //   name: "IdS",
+  //   selector: "idString",
+  //   sortable: true,
+  // },
   {
     name: "Name",
     selector: "name",
