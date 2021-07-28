@@ -1,6 +1,5 @@
 import React from "react";
 import { Fragment } from "react";
-import "./tailwindcss/tailwind.css";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 
@@ -46,7 +45,7 @@ export default function App() {
 
   return (
     <Router>
-      <div className="flex flex-col h-screen ">
+      <div className="flex flex-col h-screen">
         {/* Sidebar starts */}
         {/* Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] */}
         <div className="w-48 absolute  bg-gray-800  md:h-full justify-between hidden sm:flex flex-col shadow-xl">

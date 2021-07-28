@@ -1,16 +1,10 @@
 import SortIcon from "@material-ui/icons/ArrowDownward";
 import axios from "axios";
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import {
-  SidebarType,
-  MainSidebarContext,
-} from "../context/SidebarContextProvider";
 import "../navbar/Button.css";
 import "./Products.css";
-import { Popup } from "reactjs-popup";
 import "./form.css";
-import "../../tailwindcss/tailwind.css";
 import { emptyProduct, Product } from "./Product";
 import { actionCreators } from "../../state";
 import { ProductDetail } from "./ProductDetail";
