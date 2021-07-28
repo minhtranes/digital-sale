@@ -157,7 +157,7 @@ export const Products: FC = (Props) => {
 
   const [paginationPerPage, setPaginationPerPage] = useState<number>(10);
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setLoading(true);
@@ -197,8 +197,10 @@ export const Products: FC = (Props) => {
           Add Product
         </button>
       </div>
-      <div className="w-full h-full overflow-h overflow-scroll">
+      <div className="w-full h-full overflow-scroll">
         <DataTable
+          fixedHeader={true}
+          fixedHeaderScrollHeight="100"
           columns={columns}
           data={products.content}
           defaultSortField="id"
@@ -214,6 +216,7 @@ export const Products: FC = (Props) => {
           progressPending={loading}
           paginationPerPage={paginationPerPage}
           onRowDoubleClicked={beginEditProduct}
+          selectableRowsHighlight={true}
         />
       </div>
     </div>
