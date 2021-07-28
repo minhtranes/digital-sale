@@ -1,0 +1,31 @@
+.field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.field label {
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+  margin-right: 10px;
+  color: rgb(0, 0, 0);
+}
+.field input {
+  width: 250px;
+  font-size: large;
+  border-radius: 3px;
+}
+.field select {
+  width: 250px;
+  font-size: medium;
+}
+.field .error {
+  color: red;
+  margin-left: 3px;
+  font-size: 0.8em;
+}
+
+form button[type="submit"] {
+  margin-top: 5px;
+  margin-left: 103px;
+}
