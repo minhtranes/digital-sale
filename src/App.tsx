@@ -848,7 +848,7 @@ export default function App() {
           </Disclosure>
           {/* Navbar ends */}
           {/* Remove class [ h-64 ] when adding a card block */}
-          <div className="flex  w-full">
+          <div className="flex w-full h-full">
             {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
             {/* <div className="rounded-md border-dashed border-2 border-gray-300 shadow-xl"> */}
             {/* Place your content here */}

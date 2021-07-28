@@ -154,8 +154,6 @@ export const Products: FC = (Props) => {
     content: [],
     totalElements: 0,
   });
-  const { sidebarOpened, sidebarWidth } =
-    useContext<SidebarType>(MainSidebarContext);
 
   const [paginationPerPage, setPaginationPerPage] = useState<number>(10);
 
@@ -183,15 +181,6 @@ export const Products: FC = (Props) => {
     setLoading(false);
   };
 
-  const addProductFc = () => {
-    console.log("Mouse clicked!!");
-    return (
-      <Popup position="right center">
-        <div>Popup content here !!</div>
-      </Popup>
-    );
-  };
-
   const dispatch = useDispatch();
   const { beginEditProduct } = bindActionCreators(actionCreators, dispatch);
 
@@ -208,7 +197,7 @@ export const Products: FC = (Props) => {
           Add Product
         </button>
       </div>
-      <div className="w-full h-full overflow-hidden">
+      <div className="w-full h-full overflow-h overflow-scroll">
         <DataTable
           columns={columns}
           data={products.content}
