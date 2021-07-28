@@ -5,7 +5,7 @@ import { EditProductAction } from "../actions/index";
 
 export const beginEditProduct = (product: Product) => {
   return (dispatch: Dispatch<EditProductAction>) => {
-    console.info("Begin editing product");
+    console.info("Begin editing product {}", product.idString);
     dispatch({
       type: EditProductActionNames.EDIT_PRODUCT_BEGIN,
       visible: true,

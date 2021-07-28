@@ -1,28 +1,27 @@
-import React, { FC, useContext, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Popup } from "reactjs-popup";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../state";
-import { endEditProduct } from "../../state/action-creators";
 import { RootState } from "../../state/reducers";
 import { defaultCities } from "../config/ProductConfiguration";
 
 export const ProductDetail: FC = (props) => {
   const open = useSelector((state: RootState) => state.editingProduct.visible);
 
-  const [editingProduct, setEditingProduct] = useState(
+  const [eProduct, setEditingProduct] = useState(
     useSelector((state: RootState) => state.editingProduct.product)
   );
   const onValueChange = (e: React.FormEvent<HTMLInputElement>): void => {
     setEditingProduct({
-      ...editingProduct,
+      ...eProduct,
       [e.currentTarget.name]: e.currentTarget.value,
     });
   };
 
   const handleDropdownChange = (e: React.FormEvent<HTMLSelectElement>) => {
     setEditingProduct({
-      ...editingProduct,
+      ...eProduct,
       [e.currentTarget.name]: e.currentTarget.value,
     });
   };
@@ -36,7 +35,7 @@ export const ProductDetail: FC = (props) => {
     <Popup
       open={open}
       closeOnDocumentClick
-      onClose={() => saveEditProduct(editingProduct)}
+      onClose={() => saveEditProduct(eProduct)}
     >
       <div className="modal">
         <div className="header">Import Product</div>
@@ -44,65 +43,42 @@ export const ProductDetail: FC = (props) => {
           <div style={{ display: "inline-block" }}>
             <div className="field">
               <label>Id</label>
-              <input
-                type="text"
-                value={editingProduct.id}
-                name="id"
-                onChange={onValueChange}
-              />
+              <input type="text" value={eProduct.id} name="id" />
             </div>
             <div className="field">
               <label>Id (Text)</label>
-              <input
-                type="text"
-                value={editingProduct.idString}
-                name="idString"
-                onChange={onValueChange}
-              />
+              <input type="text" value={eProduct.idString} name="idString" />
             </div>
             <div className="field">
               <label>Name</label>
-              <input
-                type="text"
-                value={editingProduct.name}
-                name="name"
-                onChange={onValueChange}
-              />
+              <input type="text" value={eProduct.name} name="name" />
             </div>
             <div className="field">
               <label>Import Price</label>
               <input
                 type="text"
-                value={editingProduct.importPrice}
+                value={eProduct.importPrice}
                 name="importPrice"
-                onChange={onValueChange}
               />
             </div>
             <div className="field">
               <label>Sale Price</label>
-              <input
-                type="text"
-                value={editingProduct.salePrice}
-                name="salePrice"
-                onChange={onValueChange}
-              />
+              <input type="text" value={eProduct.salePrice} name="salePrice" />
             </div>
             <div className="field">
               <label>Import Date</label>
               <input
                 type="text"
-                value={editingProduct.importDate}
+                value={eProduct.importDate}
                 name="importDate"
-                onChange={onValueChange}
               />
             </div>
             <div className="field">
               <label>Expiration Date</label>
               <input
                 type="text"
-                value={editingProduct.expirationDate}
+                value={eProduct.expirationDate}
                 name="expirationDate"
-                onChange={onValueChange}
               />
             </div>
           </div>
@@ -111,18 +87,13 @@ export const ProductDetail: FC = (props) => {
               <label>Retail Department</label>
               <input
                 type="text"
-                value={editingProduct.retailDepartment}
+                value={eProduct.retailDepartment}
                 name="retailDepartment"
-                onChange={onValueChange}
               />
             </div>
             <div className="field">
               <label>City</label>
-              <select
-                defaultValue={editingProduct.city}
-                name="city"
-                onChange={handleDropdownChange}
-              >
+              <select defaultValue={eProduct.city} name="city">
                 {cities.map((city, index) => (
                   <option key={index} value={city}>
                     {city}
@@ -134,27 +105,20 @@ export const ProductDetail: FC = (props) => {
               <label>Phone Number</label>
               <input
                 type="text"
-                value={editingProduct.phoneNumber}
+                value={eProduct.phoneNumber}
                 name="phoneNumber"
-                onChange={onValueChange}
               />
             </div>
             <div className="field">
               <label>Currency</label>
-              <input
-                type="text"
-                value={editingProduct.currency}
-                name="currency"
-                onChange={onValueChange}
-              />
+              <input type="text" value={eProduct.currency} name="currency" />
             </div>
             <div className="field">
               <label>Business Address</label>
               <input
                 type="text"
-                value={editingProduct.businessAddress}
+                value={eProduct.businessAddress}
                 name="businessAddress"
-                onChange={onValueChange}
                 style={{ width: "500px" }}
               />
             </div>
@@ -163,9 +127,8 @@ export const ProductDetail: FC = (props) => {
               <label>Shipping Address</label>
               <input
                 type="text"
-                value={editingProduct.shippingAddress}
+                value={eProduct.shippingAddress}
                 name="shippingAddress"
-                onChange={onValueChange}
                 style={{ width: "500px" }}
               />
             </div>
@@ -183,7 +146,7 @@ export const ProductDetail: FC = (props) => {
             className="btn"
             type="submit"
             style={{ marginLeft: "2px" }}
-            onClick={() => saveEditProduct(editingProduct)}
+            onClick={() => saveEditProduct(eProduct)}
           >
             Save
           </button>
