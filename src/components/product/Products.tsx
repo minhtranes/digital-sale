@@ -191,7 +191,7 @@ export const Products: FC = (Props) => {
           Add Product
         </button>
       </div>
-      <div className="w-full h-full overflow-scroll">
+      <div className="w-full h-full">
         <DataTable
           fixedHeader={true}
           fixedHeaderScrollHeight="100"
@@ -211,6 +211,7 @@ export const Products: FC = (Props) => {
           paginationPerPage={paginationPerPage}
           onRowDoubleClicked={beginEditProduct}
           selectableRowsHighlight={true}
+          paginationRowsPerPageOptions={[10, 15]}
         />
       </div>
     </div>
