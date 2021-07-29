@@ -12,12 +12,12 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 
 const columns = [
-  // {
-  //   name: "Id",
-  //   selector: "id",
-  //   sortable: true,
-  //   width: "48px",
-  // },
+  {
+    name: "Id",
+    selector: "id",
+    sortable: true,
+    width: "48px",
+  },
   // {
   //   name: "IdS",
   //   selector: "idString",
@@ -38,11 +38,11 @@ const columns = [
     selector: "city",
     sortable: true,
   },
-  {
-    name: "Phone Number",
-    selector: "phoneNumber",
-    sortable: false,
-  },
+  // {
+  //   name: "Phone Number",
+  //   selector: "phoneNumber",
+  //   sortable: false,
+  // },
   {
     name: "Currency",
     selector: "currency",
@@ -58,11 +58,11 @@ const columns = [
     selector: "importPrice",
     sortable: false,
   },
-  // {
-  //   name: "Sale Price",
-  //   selector: "salePrice",
-  //   sortable: false,
-  // },
+  {
+    name: "Sale Price",
+    selector: "salePrice",
+    sortable: false,
+  },
   // {
   //   name: "Shipping Address",
   //   selector: "shippingAddress",
@@ -139,7 +139,7 @@ const customStyles = {
 type ProductList = { content: Product[]; totalElements: number };
 
 const inventoryRepository = axios.create({
-  baseURL: "https://digital-saler-inventory.herokuapp.com/inventory",
+  baseURL: "http://localhost:8080/inventory",
   headers: { "Content-Type": "application/json" },
 });
 

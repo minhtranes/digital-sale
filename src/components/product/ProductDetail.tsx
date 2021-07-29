@@ -9,33 +9,56 @@ import { defaultCities } from "../config/ProductConfiguration";
 export const ProductDetail: FC = (props) => {
   const open = useSelector((state: RootState) => state.editingProduct.visible);
 
-  const [eProduct, setEditingProduct] = useState(
-    useSelector((state: RootState) => state.editingProduct.product)
+  const iProduct = useSelector(
+    (state: RootState) => state.editingProduct.product,
+    (l, r) => l.id === r.id
   );
-  const onValueChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    setEditingProduct({
-      ...eProduct,
-      [e.currentTarget.name]: e.currentTarget.value,
-    });
+  const [eProduct, setEditingProduct] = useState(iProduct);
+  // const initalProduct = useSelector(
+  //   (state: RootState) => state.editingProduct.product
+  // );
+  const onFormOpen = () => {
+    console.log("On load eProduct {}", iProduct.id);
   };
-
+  const onValueChange = (e: React.FormEvent<HTMLInputElement>): void => {
+    console.log(
+      e.currentTarget.name +
+        " was changed from " +
+        iProduct.importPrice +
+        " to " +
+        e.currentTarget.value
+    );
+    iProduct.importPrice = 65;
+    // setIProduct({
+    //   ...iProduct,
+    //   [e.currentTarget.name]: e.currentTarget.value,
+    // });
+  };
+  const onSubmit = (): void => {
+    // event.preventDefault();
+    console.log("Saving....");
+    saveEditProduct(iProduct);
+  };
   const handleDropdownChange = (e: React.FormEvent<HTMLSelectElement>) => {
-    setEditingProduct({
-      ...eProduct,
-      [e.currentTarget.name]: e.currentTarget.value,
-    });
+    // setEditingProduct({
+    //   ...eProduct,
+    //   [e.currentTarget.name]: e.currentTarget.value,
+    // });
   };
   const [cities, setCities] = useState<string[]>(defaultCities);
-
   const dispatch = useDispatch();
-  const { endEditProduct: saveEditProduct, abortEditProduct } =
-    bindActionCreators(actionCreators, dispatch);
+  const { saveEditProduct, editProduct, abortEditProduct } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   return (
     <Popup
       open={open}
+      onOpen={onFormOpen}
       closeOnDocumentClick
-      onClose={() => saveEditProduct(eProduct)}
+      onClose={() => abortEditProduct()}
+      modal
     >
       <div className="modal">
         <div className="header">Import Product</div>
@@ -43,42 +66,66 @@ export const ProductDetail: FC = (props) => {
           <div style={{ display: "inline-block" }}>
             <div className="field">
               <label>Id</label>
-              <input type="text" value={eProduct.id} name="id" />
+              <input
+                type="text"
+                value={iProduct.id}
+                name="id"
+                onChange={onValueChange}
+              />
             </div>
             <div className="field">
               <label>Id (Text)</label>
-              <input type="text" value={eProduct.idString} name="idString" />
+              <input
+                type="text"
+                value={iProduct.idString}
+                name="idString"
+                onChange={onValueChange}
+              />
             </div>
             <div className="field">
               <label>Name</label>
-              <input type="text" value={eProduct.name} name="name" />
+              <input
+                type="text"
+                value={iProduct.name}
+                name="name"
+                onChange={onValueChange}
+                readOnly={false}
+              />
             </div>
             <div className="field">
               <label>Import Price</label>
               <input
                 type="text"
-                value={eProduct.importPrice}
+                value={iProduct.importPrice}
                 name="importPrice"
+                onChange={onValueChange}
               />
             </div>
             <div className="field">
               <label>Sale Price</label>
-              <input type="text" value={eProduct.salePrice} name="salePrice" />
+              <input
+                type="text"
+                value={iProduct.salePrice}
+                name="salePrice"
+                onChange={onValueChange}
+              />
             </div>
             <div className="field">
               <label>Import Date</label>
               <input
                 type="text"
-                value={eProduct.importDate}
+                value={iProduct.importDate}
                 name="importDate"
+                onChange={onValueChange}
               />
             </div>
             <div className="field">
               <label>Expiration Date</label>
               <input
                 type="text"
-                value={eProduct.expirationDate}
+                value={iProduct.expirationDate}
                 name="expirationDate"
+                onChange={onValueChange}
               />
             </div>
           </div>
@@ -87,13 +134,18 @@ export const ProductDetail: FC = (props) => {
               <label>Retail Department</label>
               <input
                 type="text"
-                value={eProduct.retailDepartment}
+                value={iProduct.retailDepartment}
                 name="retailDepartment"
+                onChange={onValueChange}
               />
             </div>
             <div className="field">
               <label>City</label>
-              <select defaultValue={eProduct.city} name="city">
+              <select
+                defaultValue={iProduct.city}
+                name="city"
+                onChange={handleDropdownChange}
+              >
                 {cities.map((city, index) => (
                   <option key={index} value={city}>
                     {city}
@@ -105,21 +157,28 @@ export const ProductDetail: FC = (props) => {
               <label>Phone Number</label>
               <input
                 type="text"
-                value={eProduct.phoneNumber}
+                value={iProduct.phoneNumber}
                 name="phoneNumber"
+                onChange={onValueChange}
               />
             </div>
             <div className="field">
               <label>Currency</label>
-              <input type="text" value={eProduct.currency} name="currency" />
+              <input
+                type="text"
+                value={iProduct.currency}
+                name="currency"
+                onChange={onValueChange}
+              />
             </div>
             <div className="field">
               <label>Business Address</label>
               <input
                 type="text"
-                value={eProduct.businessAddress}
+                value={iProduct.businessAddress}
                 name="businessAddress"
                 style={{ width: "500px" }}
+                onChange={onValueChange}
               />
             </div>
 
@@ -127,9 +186,10 @@ export const ProductDetail: FC = (props) => {
               <label>Shipping Address</label>
               <input
                 type="text"
-                value={eProduct.shippingAddress}
+                value={iProduct.shippingAddress}
                 name="shippingAddress"
                 style={{ width: "500px" }}
+                onChange={onValueChange}
               />
             </div>
           </div>
@@ -144,9 +204,8 @@ export const ProductDetail: FC = (props) => {
           </button>
           <button
             className="btn"
-            type="submit"
             style={{ marginLeft: "2px" }}
-            onClick={() => saveEditProduct(eProduct)}
+            onClick={() => onSubmit()}
           >
             Save
           </button>

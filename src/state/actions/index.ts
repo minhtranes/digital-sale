@@ -18,7 +18,14 @@ interface EditProductAbortAction {
   visible: boolean;
 }
 
+interface EditProductEditAction {
+  type: EditProductActionNames.EDIT_PRODUCT_EDIT;
+  field: string;
+  value: any;
+}
+
 export type EditProductAction =
   | EditProductBeginAction
   | EditProductEndAction
-  | EditProductAbortAction;
+  | EditProductAbortAction
+  | EditProductEditAction;
