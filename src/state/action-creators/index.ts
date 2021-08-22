@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { Product } from "../../components/product/Product";
+import Product from "../../components/product/Product";
 import { EditProductActionNames } from "../action-types";
 import { EditProductAction } from "../actions/index";
 

@@ -5,7 +5,7 @@ import DataTable from "react-data-table-component";
 import "../navbar/Button.css";
 import "./Products.css";
 import "./form.css";
-import { emptyProduct, Product } from "./Product";
+import Product, { emptyProduct } from "./Product";
 import { actionCreators } from "../../state";
 import { ProductDetail } from "./ProductDetail";
 import { useDispatch } from "react-redux";

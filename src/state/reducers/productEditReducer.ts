@@ -1,4 +1,4 @@
-import { emptyProduct, Product } from "../../components/product/Product";
+import Product, { emptyProduct } from "../../components/product/Product";
 import { EditProductActionNames } from "../action-types";
 import { EditProductAction } from "../actions";
 
@@ -32,7 +32,6 @@ const reducer = (
       state.visible = action.visible;
       return state;
     case EditProductActionNames.EDIT_PRODUCT_EDIT:
-      return state;
     default:
       return state;
   }
