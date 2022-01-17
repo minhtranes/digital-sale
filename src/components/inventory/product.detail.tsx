@@ -6,15 +6,24 @@ import { actionCreators } from "../../state";
 import { RootState } from "../../state/reducers";
 import reducer from "../../state/reducers/productEditReducer";
 import { defaultCities } from "../config/ProductConfiguration";
-import { emptyProduct } from "./Product";
+import { emptyProduct } from "./product";
 import productService from "../../services/product.service";
+import { string } from "yargs";
 
-export const ProductDetail: FC = (props) => {
-  const open = useSelector((state: RootState) => state.editingProduct.visible);
+interface ProductDefailInfo {
+  productId: number;
+}
+
+export const ProductDetail: FC<ProductDefailInfo> = (props) => {
+  const [open, setOpen] = useState(false);
 
   // const iProduct = useSelector((state: RootState) => state.editingProduct);
   const [eProduct, setEditingProduct] = useState(emptyProduct);
-  useEffect(() => {}, []);
+  useEffect(() => {
+    let p = productService.getOne(props.productId);
+    setEditingProduct(p);
+    setOpen(!open);
+  }, []);
 
   // const initalProduct = useSelector(
   //   (state: RootState) => state.editingProduct.product

@@ -1,4 +1,4 @@
-import { Product } from "../../components/product/Product";
+import { Product } from "../../components/inventory/product";
 import { EditProductActionNames } from "../action-types";
 
 interface EditProductBeginAction {

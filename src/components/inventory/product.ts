@@ -1,4 +1,4 @@
-interface Product {
+export interface Product {
   id: number;
   idString: string;
   name: string;
@@ -14,7 +14,6 @@ interface Product {
   expirationDate: string;
   expired: boolean;
 }
-export default Product;
 
 export const emptyProduct: Product = {
   id: 0,

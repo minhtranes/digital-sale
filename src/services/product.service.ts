@@ -1,13 +1,11 @@
-import Product, { emptyProduct } from "../components/product/Product";
+import { Product, emptyProduct } from "../components/inventory/product";
 import http from "../repository/http-common";
 
 interface ProductService {
   listAll: () => Product[] | null;
-  getOne: (id: string) => Product;
+  getOne: (id: number) => Product;
   addProduct: (p: Product) => Product;
 }
-
-export default ProductService;
 
 class ProductServiceImpl implements ProductService {
   addProduct(p: Product): Product {
@@ -24,10 +22,12 @@ class ProductServiceImpl implements ProductService {
     return null;
   }
 
-  getOne(id: string): Product {
+  getOne(id: number): Product {
     http.get<Product>(`/inventory/${id}`).then((r) => {
       return r.data;
     });
     return emptyProduct;
   }
 }
+
+export default new ProductServiceImpl();

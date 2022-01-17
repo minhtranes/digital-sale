@@ -5,11 +5,12 @@ import DataTable from "react-data-table-component";
 import "../navbar/Button.css";
 import "./Products.css";
 import "./form.css";
-import Product, { emptyProduct } from "./Product";
 import { actionCreators } from "../../state";
-import { ProductDetail } from "./ProductDetail";
+import { ProductDetail } from "./product.detail";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
+import productService from "../../services/product.service";
+import { Product, emptyProduct } from "./product";
 
 const columns = [
   {
@@ -143,11 +144,13 @@ const inventoryRepository = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-export const Products: FC = (Props) => {
+const Products: FC = (Props) => {
   const [products, setProducts] = useState<ProductList>({
     content: [],
     totalElements: 0,
   });
+
+  const [selectedProduct, setSelectedProduct] = useState<Product>(emptyProduct);
 
   const [paginationPerPage, setPaginationPerPage] = useState<number>(10);
 
@@ -180,7 +183,7 @@ export const Products: FC = (Props) => {
 
   return (
     <div className="flex flex-col h-full w-full bg-gray-400">
-      <ProductDetail />
+      <ProductDetail productId={selectedProduct.id} />
       <div className="flex px-2 justify-between py-1">
         <button
           className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md shadow-sm text-base font-sm text-white bg-indigo-600 hover:bg-indigo-700"
@@ -209,7 +212,7 @@ export const Products: FC = (Props) => {
           onChangePage={handlePageChange}
           progressPending={loading}
           paginationPerPage={paginationPerPage}
-          onRowDoubleClicked={beginEditProduct}
+          onRowDoubleClicked={setSelectedProduct}
           selectableRowsHighlight={true}
           paginationRowsPerPageOptions={[10, 15]}
         />
@@ -217,3 +220,5 @@ export const Products: FC = (Props) => {
     </div>
   );
 };
+
+export default Products;

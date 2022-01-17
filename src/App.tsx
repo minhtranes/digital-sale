@@ -18,7 +18,7 @@ import {
   SignUp,
   Consulting,
 } from "./pages/Overviews";
-import { Products } from "./components/product/Products";
+import Products from "./components/inventory/products";
 
 const navigation = ["Dashboard", "Inventory", "Reports"];
 const profile = ["Your Profile", "Settings", "Sign out"];
