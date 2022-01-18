@@ -7,7 +7,7 @@ import { RootState } from "../../state/reducers";
 import reducer from "../../state/reducers/productEditReducer";
 import { defaultCities } from "../config/ProductConfiguration";
 import { emptyProduct, Product } from "./product";
-import productService from "../../services/product.service";
+import { saveProduct } from "../../services/product.service";
 import { string } from "yargs";
 
 interface ProductDefailInfo {
@@ -15,13 +15,13 @@ interface ProductDefailInfo {
   visible: boolean;
 }
 
-const mapStateToProps = (state: RootState): ProductDefailInfo => {
-  console.log("Map state to props " + state.editingProduct.product.id);
-  return {
-    product: state.editingProduct.product,
-    visible: state.editingProduct.visible,
-  };
-};
+// const mapStateToProps = (state: RootState): ProductDefailInfo => {
+//   console.log("Map state to props " + state.editingProduct.product.id);
+//   return {
+//     product: state.editingProduct.product,
+//     visible: state.editingProduct.visible,
+//   };
+// };
 
 const ProductDetail: FC<ProductDefailInfo> = (props) => {
   const [open, setOpen] = useState(false);
@@ -29,26 +29,36 @@ const ProductDetail: FC<ProductDefailInfo> = (props) => {
   // const iProduct = useSelector((state: RootState) => state.editingProduct);
   const [selectedProduct, setEditingProduct] = useState(emptyProduct);
   useEffect(() => {
-    setEditingProduct(props.product);
-    setOpen(props.visible);
+    // setEditingProduct(props.product);
+    // setOpen(props.visible);
     console.log("Open = " + open + " product = " + selectedProduct.id);
-    setOpen(open);
+    // setOpen(open);
   }, []);
 
-  // const selectedProduct = useSelector((state: RootState) => {
-  //   console.log(
-  //     "Selected product changed to " + state.editingProduct.product.id
-  //   );
+  const ep = useSelector((state: RootState) => {
+    console.log(
+      "Selected product changed to " + state.editingProduct.product.id
+    );
+    // setEditingProduct(state.editingProduct.product);
+    return state.editingProduct.product;
+  });
 
-  //   return state.editingProduct.product;
-  // });
   // const openSelector = useSelector(
-  //   (state: RootState) => state.editingProduct.product
+  //   (state: RootState) => state.editingProduct.visible
   // );
 
   const onFormOpen = () => {
-    // console.log("On load eProduct {}", eProduct.id);
+    console.log("On visible: ");
+    // const p = useSelector((state: RootState) => {
+    //   console.log(
+    //     "Selected product changed to " + state.editingProduct.product.id
+    //   );
+    //   // setEditingProduct(state.editingProduct.product);
+    //   return state.editingProduct.product;
+    // });
+    setEditingProduct(ep);
   };
+
   const onValueChange = (e: React.FormEvent<HTMLInputElement>): void => {
     // console.log(
     //   e.currentTarget.name +
@@ -65,7 +75,19 @@ const ProductDetail: FC<ProductDefailInfo> = (props) => {
     // setEditingProduct({
     //   product
     // })
+    // console.info(
+    //   "Action: update, key = [%s] value = [%s]",
+    //   e.currentTarget.name,
+    //   e.currentTarget.value
+    // );
+    // editProduct(e.currentTarget.name, e.currentTarget.value);
   };
+
+  const onSaveProduct = () => {
+    var savedProduct = saveProduct(selectedProduct);
+    saveEditProduct(savedProduct);
+  };
+
   const onSubmit = (): void => {
     // event.preventDefault();
     console.log("Saving....");
@@ -237,7 +259,7 @@ const ProductDetail: FC<ProductDefailInfo> = (props) => {
           <button
             className="btn"
             style={{ marginLeft: "2px" }}
-            onClick={() => saveEditProduct(selectedProduct)}
+            onClick={onSaveProduct}
           >
             Save
           </button>
@@ -247,5 +269,5 @@ const ProductDetail: FC<ProductDefailInfo> = (props) => {
   );
 };
 
-export default connect(mapStateToProps)(ProductDetail);
-// export default ProductDetail;
+// export default connect(mapStateToProps)(ProductDetail);
+export default ProductDetail;

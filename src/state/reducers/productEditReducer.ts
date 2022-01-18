@@ -40,6 +40,13 @@ const reducer = (
       state.visible = action.visible;
       return state;
     case EditProductActionNames.EDIT_PRODUCT_EDIT:
+      console.info(
+        "Updating field [%s] with value [%s]",
+        action.field,
+        action.value
+      );
+      state.product.name = action.value;
+      return { ...state, [action.field]: action.value };
     default:
       return state;
   }

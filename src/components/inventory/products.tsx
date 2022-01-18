@@ -9,7 +9,7 @@ import { actionCreators } from "../../state";
 import ProductDetail from "./product.detail";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import productService from "../../services/product.service";
+import {} from "../../services/product.service";
 import { Product, emptyProduct } from "./product";
 
 const columns = [
@@ -150,7 +150,9 @@ const Products: FC = (Props) => {
     totalElements: 0,
   });
 
-  const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
+  const [selectedProducts, setSelectedProducts] = useState<Product[]>([
+    emptyProduct,
+  ]);
 
   const handleSelectedChange = (s: {
     allSelected: boolean;
@@ -191,7 +193,7 @@ const Products: FC = (Props) => {
 
   return (
     <div className="flex flex-col h-full w-full bg-gray-400">
-      <ProductDetail />
+      <ProductDetail product={selectedProducts[0]} visible={true} />
       <div className="flex px-2 justify-between py-1">
         <button
           className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md shadow-sm text-base font-sm text-white bg-indigo-600 hover:bg-indigo-700"
