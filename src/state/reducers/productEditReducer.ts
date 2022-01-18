@@ -23,6 +23,14 @@ const reducer = (
       state.visible = action.visible;
       state.product = action.product;
       state.temporaryProduct = action.product;
+      console.log(
+        "Type = " +
+          action.type +
+          " Product = " +
+          action.product.id +
+          " Visible = " +
+          action.visible
+      );
       return state;
     case EditProductActionNames.EDIT_PRODUCT_SAVE:
       state.visible = action.visible;

@@ -11,7 +11,7 @@ import { EditProductAction } from "../actions/index";
  */
 export const beginEditProduct = (product: Product) => {
   return (dispatch: Dispatch<EditProductAction>) => {
-    console.info("Begin editing product {}", product.idString);
+    console.info("Begin editing product " + product.idString);
     dispatch({
       type: EditProductActionNames.EDIT_PRODUCT_BEGIN,
       visible: true,
@@ -27,7 +27,7 @@ export const beginEditProduct = (product: Product) => {
  */
 export const saveEditProduct = (product: Product) => {
   return (dispatch: Dispatch<EditProductAction>) => {
-    console.info("Save editing product {}", product.idString);
+    console.info("Save editing product " + product.idString);
     dispatch({
       type: EditProductActionNames.EDIT_PRODUCT_SAVE,
       visible: false,

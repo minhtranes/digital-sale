@@ -1,31 +1,48 @@
 import React, { FC, useEffect, useReducer, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { Popup } from "reactjs-popup";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../state";
 import { RootState } from "../../state/reducers";
 import reducer from "../../state/reducers/productEditReducer";
 import { defaultCities } from "../config/ProductConfiguration";
-import { emptyProduct } from "./product";
+import { emptyProduct, Product } from "./product";
 import productService from "../../services/product.service";
 import { string } from "yargs";
 
 interface ProductDefailInfo {
-  productId: number;
+  product: Product;
+  visible: boolean;
 }
 
-export const ProductDetail: FC<ProductDefailInfo> = (props) => {
+const mapStateToProps = (state: RootState): ProductDefailInfo => {
+  console.log("Map state to props " + state.editingProduct.product.id);
+  return {
+    product: state.editingProduct.product,
+    visible: state.editingProduct.visible,
+  };
+};
+
+const ProductDetail: FC<ProductDefailInfo> = (props) => {
   const [open, setOpen] = useState(false);
 
   // const iProduct = useSelector((state: RootState) => state.editingProduct);
-  const [eProduct, setEditingProduct] = useState(emptyProduct);
+  const [selectedProduct, setEditingProduct] = useState(emptyProduct);
   useEffect(() => {
-    let p = productService.getOne(props.productId);
-    setEditingProduct(p);
-    setOpen(!open);
+    setEditingProduct(props.product);
+    setOpen(props.visible);
+    console.log("Open = " + open + " product = " + selectedProduct.id);
+    setOpen(open);
   }, []);
 
-  // const initalProduct = useSelector(
+  // const selectedProduct = useSelector((state: RootState) => {
+  //   console.log(
+  //     "Selected product changed to " + state.editingProduct.product.id
+  //   );
+
+  //   return state.editingProduct.product;
+  // });
+  // const openSelector = useSelector(
   //   (state: RootState) => state.editingProduct.product
   // );
 
@@ -41,10 +58,10 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
     //     e.currentTarget.value
     // );
     // eProduct.importPrice = 65;
-    // setEditingProduct({
-    //   ...eProduct.product,
-    //   [e.currentTarget.name]: e.currentTarget.value,
-    // });
+    setEditingProduct({
+      ...selectedProduct,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
     // setEditingProduct({
     //   product
     // })
@@ -69,7 +86,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
 
   return (
     <Popup
-      open={open}
+      open={useSelector((state: RootState) => state.editingProduct.visible)}
       onOpen={onFormOpen}
       closeOnDocumentClick
       onClose={() => abortEditProduct()}
@@ -83,7 +100,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
               <label>Id</label>
               <input
                 type="text"
-                value={eProduct.id}
+                value={selectedProduct.id}
                 name="id"
                 onChange={onValueChange}
               />
@@ -92,7 +109,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
               <label>Id (Text)</label>
               <input
                 type="text"
-                value={eProduct.idString}
+                value={selectedProduct.idString}
                 name="idString"
                 onChange={onValueChange}
               />
@@ -101,7 +118,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
               <label>Name</label>
               <input
                 type="text"
-                value={eProduct.name}
+                value={selectedProduct.name}
                 name="name"
                 onChange={onValueChange}
                 readOnly={false}
@@ -111,7 +128,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
               <label>Import Price</label>
               <input
                 type="text"
-                value={eProduct.importPrice}
+                value={selectedProduct.importPrice}
                 name="importPrice"
                 onChange={onValueChange}
               />
@@ -120,7 +137,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
               <label>Sale Price</label>
               <input
                 type="text"
-                value={eProduct.salePrice}
+                value={selectedProduct.salePrice}
                 name="salePrice"
                 onChange={onValueChange}
               />
@@ -129,7 +146,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
               <label>Import Date</label>
               <input
                 type="text"
-                value={eProduct.importDate}
+                value={selectedProduct.importDate}
                 name="importDate"
                 onChange={onValueChange}
               />
@@ -138,7 +155,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
               <label>Expiration Date</label>
               <input
                 type="text"
-                value={eProduct.expirationDate}
+                value={selectedProduct.expirationDate}
                 name="expirationDate"
                 onChange={onValueChange}
               />
@@ -149,7 +166,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
               <label>Retail Department</label>
               <input
                 type="text"
-                value={eProduct.retailDepartment}
+                value={selectedProduct.retailDepartment}
                 name="retailDepartment"
                 onChange={onValueChange}
               />
@@ -157,7 +174,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
             <div className="field">
               <label>City</label>
               <select
-                defaultValue={eProduct.city}
+                defaultValue={selectedProduct.city}
                 name="city"
                 onChange={handleDropdownChange}
               >
@@ -172,7 +189,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
               <label>Phone Number</label>
               <input
                 type="text"
-                value={eProduct.phoneNumber}
+                value={selectedProduct.phoneNumber}
                 name="phoneNumber"
                 onChange={onValueChange}
               />
@@ -181,7 +198,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
               <label>Currency</label>
               <input
                 type="text"
-                value={eProduct.currency}
+                value={selectedProduct.currency}
                 name="currency"
                 onChange={onValueChange}
               />
@@ -190,7 +207,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
               <label>Business Address</label>
               <input
                 type="text"
-                value={eProduct.businessAddress}
+                value={selectedProduct.businessAddress}
                 name="businessAddress"
                 style={{ width: "500px" }}
                 onChange={onValueChange}
@@ -201,7 +218,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
               <label>Shipping Address</label>
               <input
                 type="text"
-                value={eProduct.shippingAddress}
+                value={selectedProduct.shippingAddress}
                 name="shippingAddress"
                 style={{ width: "500px" }}
                 onChange={onValueChange}
@@ -220,7 +237,7 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
           <button
             className="btn"
             style={{ marginLeft: "2px" }}
-            onClick={() => saveEditProduct(eProduct)}
+            onClick={() => saveEditProduct(selectedProduct)}
           >
             Save
           </button>
@@ -229,3 +246,6 @@ export const ProductDetail: FC<ProductDefailInfo> = (props) => {
     </Popup>
   );
 };
+
+export default connect(mapStateToProps)(ProductDetail);
+// export default ProductDetail;

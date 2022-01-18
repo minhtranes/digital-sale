@@ -6,7 +6,7 @@ import "../navbar/Button.css";
 import "./Products.css";
 import "./form.css";
 import { actionCreators } from "../../state";
-import { ProductDetail } from "./product.detail";
+import ProductDetail from "./product.detail";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import productService from "../../services/product.service";
@@ -150,7 +150,15 @@ const Products: FC = (Props) => {
     totalElements: 0,
   });
 
-  const [selectedProduct, setSelectedProduct] = useState<Product>(emptyProduct);
+  const [selectedProducts, setSelectedProducts] = useState<Product[]>([]);
+
+  const handleSelectedChange = (s: {
+    allSelected: boolean;
+    selectedCount: number;
+    selectedRows: Product[];
+  }) => {
+    setSelectedProducts(s.selectedRows);
+  };
 
   const [paginationPerPage, setPaginationPerPage] = useState<number>(10);
 
@@ -183,12 +191,12 @@ const Products: FC = (Props) => {
 
   return (
     <div className="flex flex-col h-full w-full bg-gray-400">
-      <ProductDetail productId={selectedProduct.id} />
+      <ProductDetail />
       <div className="flex px-2 justify-between py-1">
         <button
           className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md shadow-sm text-base font-sm text-white bg-indigo-600 hover:bg-indigo-700"
           onClick={() => {
-            beginEditProduct(emptyProduct);
+            beginEditProduct(selectedProducts[0]);
           }}
         >
           Add Product
@@ -204,6 +212,7 @@ const Products: FC = (Props) => {
           sortIcon={<SortIcon />}
           pagination
           selectableRows
+          onSelectedRowsChange={handleSelectedChange}
           customStyles={customStyles}
           striped={false}
           responsive={true}
@@ -212,7 +221,7 @@ const Products: FC = (Props) => {
           onChangePage={handlePageChange}
           progressPending={loading}
           paginationPerPage={paginationPerPage}
-          onRowDoubleClicked={setSelectedProduct}
+          // onRowDoubleClicked={setSelectedProduct}
           selectableRowsHighlight={true}
           paginationRowsPerPageOptions={[10, 15]}
         />
