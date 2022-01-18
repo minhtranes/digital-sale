@@ -4,7 +4,7 @@ import { Popup } from "reactjs-popup";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../state";
 import { RootState } from "../../state/reducers";
-import reducer from "../../state/reducers/productEditReducer";
+import editProductReducer from "../../state/reducers/productEditReducer";
 import { defaultCities } from "../config/ProductConfiguration";
 import { emptyProduct, Product } from "./product";
 import { saveProduct } from "../../services/product.service";

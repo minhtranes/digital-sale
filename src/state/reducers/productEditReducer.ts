@@ -14,7 +14,7 @@ const initialState: EditingProduct = {
   temporaryProduct: emptyProduct,
 };
 
-const reducer = (
+const editProductReducer = (
   state: EditingProduct = initialState,
   action: EditProductAction
 ): EditingProduct => {
@@ -52,4 +52,4 @@ const reducer = (
   }
 };
 
-export default reducer;
+export default editProductReducer;

@@ -5,12 +5,13 @@ import DataTable from "react-data-table-component";
 import "../navbar/Button.css";
 import "./Products.css";
 import "./form.css";
-import { actionCreators } from "../../state";
+import { actionCreators, productListActionCreators } from "../../state";
 import ProductDetail from "./product.detail";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import {} from "../../services/product.service";
+import { listAll } from "../../services/product.service";
 import { Product, emptyProduct } from "./product";
+import { RootState } from "../../state/reducers";
 
 const columns = [
   {
@@ -145,9 +146,14 @@ const inventoryRepository = axios.create({
 });
 
 const Products: FC = (Props) => {
-  const [products, setProducts] = useState<ProductList>({
-    content: [],
-    totalElements: 0,
+  // const [products, setProducts] = useState<ProductList>({
+  //   content: [],
+  //   totalElements: 0,
+  // });
+
+  const productList = useSelector((state: RootState) => {
+    console.info("Product list updated");
+    return state.productList;
   });
 
   const [selectedProducts, setSelectedProducts] = useState<Product[]>([
@@ -169,10 +175,14 @@ const Products: FC = (Props) => {
   useEffect(() => {
     setLoading(true);
 
-    inventoryRepository.get<ProductList>("/list").then((r) => {
-      console.log(r.data);
-      setProducts(r.data);
-    });
+    // inventoryRepository.get<ProductList>("/list").then((r) => {
+    //   console.log(r.data);
+    //   setProducts(r.data);
+    // });
+    listAll(dispatch);
+    // console.log(initialData);
+    // console.info("Fetched [%s] products", initialData.content.length);
+    // setProducts(initialData);
     setLoading(false);
   }, []);
 
@@ -180,10 +190,10 @@ const Products: FC = (Props) => {
     setLoading(true);
 
     console.log("Page change to " + page);
-    inventoryRepository.get<ProductList>(`/list?page={page}`).then((r) => {
-      console.log(r.data);
-      setProducts(r.data);
-    });
+    // inventoryRepository.get<ProductList>(`/list?page={page}`).then((r) => {
+    //   console.log(r.data);
+    //   setProducts(r.data);
+    // });
 
     setLoading(false);
   };
@@ -209,7 +219,7 @@ const Products: FC = (Props) => {
           fixedHeader={true}
           fixedHeaderScrollHeight="100"
           columns={columns}
-          data={products.content}
+          data={productList.products}
           defaultSortField="id"
           sortIcon={<SortIcon />}
           pagination
@@ -218,7 +228,7 @@ const Products: FC = (Props) => {
           customStyles={customStyles}
           striped={false}
           responsive={true}
-          paginationTotalRows={products.totalElements}
+          paginationTotalRows={productList.totalElements}
           highlightOnHover={true}
           onChangePage={handlePageChange}
           progressPending={loading}
