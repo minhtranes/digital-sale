@@ -138,12 +138,12 @@ const customStyles = {
   },
 };
 
-type ProductList = { content: Product[]; totalElements: number };
+// type ProductList = { content: Product[]; totalElements: number };
 
-const inventoryRepository = axios.create({
-  baseURL: "http://localhost:8080/inventory",
-  headers: { "Content-Type": "application/json" },
-});
+// const inventoryRepository = axios.create({
+//   baseURL: "http://localhost:8080/inventory",
+//   headers: { "Content-Type": "application/json" },
+// });
 
 const Products: FC = (Props) => {
   // const [products, setProducts] = useState<ProductList>({
@@ -153,7 +153,11 @@ const Products: FC = (Props) => {
 
   const productList = useSelector((state: RootState) => {
     console.info("Product list updated");
+    console.info(state.productList.products);
     return state.productList;
+  });
+  const editingProduct = useSelector((state: RootState) => {
+    return state.editingProduct.product;
   });
 
   const [selectedProducts, setSelectedProducts] = useState<Product[]>([
@@ -165,6 +169,7 @@ const Products: FC = (Props) => {
     selectedCount: number;
     selectedRows: Product[];
   }) => {
+    console.info("handleSelectedChange");
     setSelectedProducts(s.selectedRows);
   };
 
@@ -179,7 +184,8 @@ const Products: FC = (Props) => {
     //   console.log(r.data);
     //   setProducts(r.data);
     // });
-    listAll(dispatch);
+    console.info("useEffect");
+    listAll(0, dispatch);
     // console.log(initialData);
     // console.info("Fetched [%s] products", initialData.content.length);
     // setProducts(initialData);
@@ -199,11 +205,17 @@ const Products: FC = (Props) => {
   };
 
   const dispatch = useDispatch();
-  const { beginEditProduct } = bindActionCreators(actionCreators, dispatch);
+  const { updateProducts, removeProducts, loadComplete } = bindActionCreators(
+    productListActionCreators,
+    dispatch
+  );
+
+  const { saveEditProduct, editProduct, abortEditProduct, beginEditProduct } =
+    bindActionCreators(actionCreators, dispatch);
 
   return (
     <div className="flex flex-col h-full w-full bg-gray-400">
-      <ProductDetail product={selectedProducts[0]} visible={true} />
+      <ProductDetail />
       <div className="flex px-2 justify-between py-1">
         <button
           className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md shadow-sm text-base font-sm text-white bg-indigo-600 hover:bg-indigo-700"
@@ -236,6 +248,11 @@ const Products: FC = (Props) => {
           // onRowDoubleClicked={setSelectedProduct}
           selectableRowsHighlight={true}
           paginationRowsPerPageOptions={[10, 15]}
+          clearSelectedRows={
+            editingProduct == null ||
+            editingProduct == undefined ||
+            editingProduct == emptyProduct
+          }
         />
       </div>
     </div>

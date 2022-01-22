@@ -18,37 +18,31 @@ const editProductReducer = (
   state: EditingProduct = initialState,
   action: EditProductAction
 ): EditingProduct => {
+  console.info(action.type);
   switch (action.type) {
     case EditProductActionNames.EDIT_PRODUCT_BEGIN:
-      state.visible = action.visible;
-      state.product = action.product;
-      state.temporaryProduct = action.product;
-      console.log(
-        "Type = " +
-          action.type +
-          " Product = " +
-          action.product.id +
-          " Visible = " +
-          action.visible
-      );
-      return state;
+      var visible = action.visible;
+      var product = action.product;
+      var temporaryProduct = state.product;
+      return { ...state, product, visible, temporaryProduct };
+
     case EditProductActionNames.EDIT_PRODUCT_SAVE:
-      state.visible = action.visible;
-      state.product = state.temporaryProduct;
-      return state;
+      var visible = action.visible;
+      var product: Product = emptyProduct;
+
+      return { ...state, product, visible };
+
     case EditProductActionNames.EDIT_PRODUCT_ABORT:
-      state.visible = action.visible;
-      return state;
+      var visible = action.visible;
+      return { ...state, visible };
+
     case EditProductActionNames.EDIT_PRODUCT_EDIT:
-      console.info(
-        "Updating field [%s] with value [%s]",
-        action.field,
-        action.value
-      );
-      state.product.name = action.value;
-      return { ...state, [action.field]: action.value };
+      var field = action.field;
+      var value = action.value;
+      return { ...state, [field]: value };
+
     default:
-      return state;
+      return { ...state };
   }
 };
 

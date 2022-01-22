@@ -3,11 +3,27 @@ import { bindActionCreators, Dispatch } from "redux";
 import { Product, emptyProduct } from "../components/inventory/product";
 import http from "../repository/http-common";
 import { productListActionCreators } from "../state";
-import { ProductListActionNames } from "../state/action-types";
+import {
+  loadComplete,
+  updateProducts,
+} from "../state/action-creators/productListActionCreators";
+import {
+  EditProductActionNames,
+  ProductListActionNames,
+} from "../state/action-types";
 
-export const saveProduct = (p: Product): Product => {
+export const saveProduct = (p: Product, dispatch: Dispatch): Product => {
   http.post<Product>(`/inventory/save`, p).then((r) => {
-    return r.data;
+    dispatch({
+      type: ProductListActionNames.PRODUCT_LIST_UPDATE_ELEMENTS,
+      updatedProducts: [r.data],
+    });
+    dispatch({
+      type: EditProductActionNames.EDIT_PRODUCT_SAVE,
+      visible: false,
+      product: r.data,
+    });
+    return r;
   });
   return p;
 };
@@ -19,12 +35,16 @@ export const saveProduct = (p: Product): Product => {
 // );
 
 export const listAll = (
+  page: number,
   dispatch: Dispatch
 ): { content: Product[]; totalElements: number } => {
   http
-    .get<{ content: Product[]; totalElements: number }>(`/inventory/list`)
+    .get<{ content: Product[]; totalElements: number }>(
+      `/inventory/list?page=` + page
+    )
     .then((r) => {
       console.info(r.data);
+      // loadComplete(r.data.content, r.data.totalElements);
       dispatch({
         type: ProductListActionNames.PRODUCT_LIST_COMPLETE_LOADING,
         products: r.data.content,

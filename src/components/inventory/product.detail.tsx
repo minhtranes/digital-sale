@@ -9,6 +9,7 @@ import { defaultCities } from "../config/ProductConfiguration";
 import { emptyProduct, Product } from "./product";
 import { saveProduct } from "../../services/product.service";
 import { string } from "yargs";
+import { abortEditProduct, saveEditProduct } from "../../state/action-creators";
 
 interface ProductDefailInfo {
   product: Product;
@@ -23,7 +24,7 @@ interface ProductDefailInfo {
 //   };
 // };
 
-const ProductDetail: FC<ProductDefailInfo> = (props) => {
+const ProductDetail: FC = (props) => {
   const [open, setOpen] = useState(false);
 
   // const iProduct = useSelector((state: RootState) => state.editingProduct);
@@ -36,11 +37,10 @@ const ProductDetail: FC<ProductDefailInfo> = (props) => {
   }, []);
 
   const ep = useSelector((state: RootState) => {
-    console.log(
-      "Selected product changed to " + state.editingProduct.product.id
-    );
+    var p = state.editingProduct.product;
+    console.log("Editing product: id = " + p.id + ", name = " + p.name);
     // setEditingProduct(state.editingProduct.product);
-    return state.editingProduct.product;
+    return p;
   });
 
   // const openSelector = useSelector(
@@ -84,8 +84,7 @@ const ProductDetail: FC<ProductDefailInfo> = (props) => {
   };
 
   const onSaveProduct = () => {
-    var savedProduct = saveProduct(selectedProduct);
-    saveEditProduct(savedProduct);
+    var savedProduct = saveProduct(selectedProduct, dispatch);
   };
 
   const onSubmit = (): void => {
@@ -111,7 +110,6 @@ const ProductDetail: FC<ProductDefailInfo> = (props) => {
       open={useSelector((state: RootState) => state.editingProduct.visible)}
       onOpen={onFormOpen}
       closeOnDocumentClick
-      onClose={() => abortEditProduct()}
       modal
     >
       <div className="modal">
