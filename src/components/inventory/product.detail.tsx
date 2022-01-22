@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Popup } from "reactjs-popup";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../../state";
+import { actionCreators, productListActionCreators } from "../../state";
 import { RootState } from "../../state/reducers";
 import { defaultCities } from "../config/ProductConfiguration";
 import { emptyProduct } from "./product";
@@ -34,7 +34,10 @@ const ProductDetail: FC = (props) => {
   };
 
   const onSaveProduct = () => {
-    var savedProduct = saveProduct(selectedProduct, dispatch);
+    saveProduct(selectedProduct).then((r) => {
+      updateProducts([r.data]);
+      saveEditProduct(r.data);
+    });
   };
 
   const handleDropdownChange = (e: React.FormEvent<HTMLSelectElement>) => {};
@@ -42,6 +45,11 @@ const ProductDetail: FC = (props) => {
   const dispatch = useDispatch();
   const { saveEditProduct, editProduct, abortEditProduct } = bindActionCreators(
     actionCreators,
+    dispatch
+  );
+
+  const { updateProducts } = bindActionCreators(
+    productListActionCreators,
     dispatch
   );
 

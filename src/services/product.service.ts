@@ -1,50 +1,17 @@
-import { Dispatch } from "redux";
-import { Product, emptyProduct } from "../components/inventory/product";
+import { AxiosResponse } from "axios";
+import { Product } from "../components/inventory/product";
 import http from "../repository/http-common";
-import {
-  EditProductActionNames,
-  ProductListActionNames,
-} from "../state/action-types";
 
-export const saveProduct = (p: Product, dispatch: Dispatch): Product => {
-  http.post<Product>(`/inventory/save`, p).then((r) => {
-    dispatch({
-      type: ProductListActionNames.PRODUCT_LIST_UPDATE_ELEMENTS,
-      updatedProducts: [r.data],
-    });
-    dispatch({
-      type: EditProductActionNames.EDIT_PRODUCT_SAVE,
-      visible: false,
-      product: r.data,
-    });
-    return r;
-  });
-  return p;
+export const saveProduct = (p: Product): Promise<AxiosResponse<Product>> => {
+  return http.post(`/inventory/save`, p);
 };
 
 export const listAll = (
-  page: number,
-  dispatch: Dispatch
-): { content: Product[]; totalElements: number } => {
-  http
-    .get<{ content: Product[]; totalElements: number }>(
-      `/inventory/list?page=` + page
-    )
-    .then((r) => {
-      console.info(r.data);
-      dispatch({
-        type: ProductListActionNames.PRODUCT_LIST_COMPLETE_LOADING,
-        products: r.data.content,
-        totalElements: r.data.totalElements,
-      });
-      return r.data;
-    });
-  return { content: [], totalElements: 0 };
+  page: number
+): Promise<AxiosResponse<{ content: Product[]; totalElements: number }>> => {
+  return http.get(`/inventory/list?page=` + page);
 };
 
-export const getOne = (id: number): Product => {
-  http.get<Product>(`/inventory/${id}`).then((r) => {
-    return r.data;
-  });
-  return emptyProduct;
+export const getOne = (id: number): Promise<AxiosResponse<Product>> => {
+  return http.get(`/inventory/${id}`);
 };

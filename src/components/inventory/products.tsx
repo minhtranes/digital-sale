@@ -166,9 +166,11 @@ const Products: FC = (Props) => {
 
   useEffect(() => {
     setLoading(true);
-
-    listAll(0, dispatch);
-    setLoading(false);
+    listAll(0).then((r) => {
+      console.info(r.data);
+      loadComplete(r.data.content, r.data.totalElements);
+      setLoading(false);
+    });
   }, []);
 
   const handlePageChange = (page: number) => {
