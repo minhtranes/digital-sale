@@ -34,7 +34,8 @@ const editProductReducer = (
 
     case EditProductActionNames.EDIT_PRODUCT_ABORT:
       var visible = action.visible;
-      return { ...state, visible };
+      var product = state.product;
+      return { ...state, product, visible };
 
     case EditProductActionNames.EDIT_PRODUCT_EDIT:
       var field = action.field;
