@@ -139,8 +139,10 @@ const customStyles = {
 
 const Products: FC = (Props) => {
   const productList = useSelector((state: RootState) => {
-    console.info("Product list updated");
-    console.info(state.productList.products);
+    console.info(
+      "Product list totalElements = [%s]",
+      state.productList.totalElements
+    );
     return state.productList;
   });
   const editingProduct = useSelector((state: RootState) => {
@@ -173,12 +175,15 @@ const Products: FC = (Props) => {
     });
   }, []);
 
-  const handlePageChange = (page: number) => {
+  const handlePageChange = (page: number, totalRows: number) => {
     setLoading(true);
 
-    console.log("Page change to " + page);
-
-    setLoading(false);
+    console.log("Page: [%s]", page);
+    listAll(page).then((r) => {
+      console.info(r.data);
+      loadComplete(r.data.content, r.data.totalElements);
+      setLoading(false);
+    });
   };
 
   const dispatch = useDispatch();
@@ -222,9 +227,10 @@ const Products: FC = (Props) => {
           onChangePage={handlePageChange}
           progressPending={loading}
           paginationPerPage={paginationPerPage}
+          paginationServer={false}
           // onRowDoubleClicked={setSelectedProduct}
           selectableRowsHighlight={true}
-          paginationRowsPerPageOptions={[10, 15]}
+          paginationRowsPerPageOptions={[10, 15, 20, 50, 100]}
           clearSelectedRows={
             editingProduct === null ||
             editingProduct === undefined ||

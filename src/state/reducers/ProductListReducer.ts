@@ -7,6 +7,10 @@ export type ProductList = {
   totalElements: number;
 };
 
+const isSameProduct = (p1: Product, p2: Product) => {
+  return p1.id === p2.id;
+};
+
 const productListReducer = (
   state: ProductList = { products: [], totalElements: 0 },
   action: ProductListAction
@@ -14,11 +18,15 @@ const productListReducer = (
   console.info(action.type);
   switch (action.type) {
     case ProductListActionNames.PRODUCT_LIST_COMPLETE_LOADING:
-      // state.products = action.products;
-      var products: Product[] = [];
-      products.push(...action.products);
+      var products: Product[] = [...state.products];
+      action.products.forEach((addedProduct) => {
+        if (products.findIndex((p) => isSameProduct(p, addedProduct)) < 0) {
+          products.push(addedProduct);
+        }
+      });
+      var totalElements = action.totalElements;
 
-      return { ...state, products };
+      return { ...state, products, totalElements };
     case ProductListActionNames.PRODUCT_LIST_REMOVE_ELEMENTS:
       var products: Product[] = [...state.products];
       action.removedProducts.forEach((removedElement) => {
