@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 import { Product } from "../../components/inventory/product";
 import { EditProductActionNames } from "../action-types";
-import { EditProductAction } from "../actions/index";
+import { EditProductAction } from "../actions/productEditActions";
 
 /**
  * This makes detail window visible to user to start edit a given product

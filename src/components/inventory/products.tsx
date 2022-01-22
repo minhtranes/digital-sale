@@ -1,5 +1,4 @@
 import SortIcon from "@material-ui/icons/ArrowDownward";
-import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import "../navbar/Button.css";
@@ -138,19 +137,7 @@ const customStyles = {
   },
 };
 
-// type ProductList = { content: Product[]; totalElements: number };
-
-// const inventoryRepository = axios.create({
-//   baseURL: "http://localhost:8080/inventory",
-//   headers: { "Content-Type": "application/json" },
-// });
-
 const Products: FC = (Props) => {
-  // const [products, setProducts] = useState<ProductList>({
-  //   content: [],
-  //   totalElements: 0,
-  // });
-
   const productList = useSelector((state: RootState) => {
     console.info("Product list updated");
     console.info(state.productList.products);
@@ -180,15 +167,7 @@ const Products: FC = (Props) => {
   useEffect(() => {
     setLoading(true);
 
-    // inventoryRepository.get<ProductList>("/list").then((r) => {
-    //   console.log(r.data);
-    //   setProducts(r.data);
-    // });
-    console.info("useEffect");
     listAll(0, dispatch);
-    // console.log(initialData);
-    // console.info("Fetched [%s] products", initialData.content.length);
-    // setProducts(initialData);
     setLoading(false);
   }, []);
 
@@ -196,10 +175,6 @@ const Products: FC = (Props) => {
     setLoading(true);
 
     console.log("Page change to " + page);
-    // inventoryRepository.get<ProductList>(`/list?page={page}`).then((r) => {
-    //   console.log(r.data);
-    //   setProducts(r.data);
-    // });
 
     setLoading(false);
   };
@@ -249,9 +224,9 @@ const Products: FC = (Props) => {
           selectableRowsHighlight={true}
           paginationRowsPerPageOptions={[10, 15]}
           clearSelectedRows={
-            editingProduct == null ||
-            editingProduct == undefined ||
-            editingProduct == emptyProduct
+            editingProduct === null ||
+            editingProduct === undefined ||
+            editingProduct === emptyProduct
           }
         />
       </div>

@@ -1,103 +1,43 @@
-import React, { FC, useEffect, useReducer, useState } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import React, { FC, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Popup } from "reactjs-popup";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../state";
 import { RootState } from "../../state/reducers";
-import editProductReducer from "../../state/reducers/productEditReducer";
 import { defaultCities } from "../config/ProductConfiguration";
-import { emptyProduct, Product } from "./product";
+import { emptyProduct } from "./product";
 import { saveProduct } from "../../services/product.service";
-import { string } from "yargs";
-import { abortEditProduct, saveEditProduct } from "../../state/action-creators";
-
-interface ProductDefailInfo {
-  product: Product;
-  visible: boolean;
-}
-
-// const mapStateToProps = (state: RootState): ProductDefailInfo => {
-//   console.log("Map state to props " + state.editingProduct.product.id);
-//   return {
-//     product: state.editingProduct.product,
-//     visible: state.editingProduct.visible,
-//   };
-// };
 
 const ProductDetail: FC = (props) => {
   const [open, setOpen] = useState(false);
 
-  // const iProduct = useSelector((state: RootState) => state.editingProduct);
   const [selectedProduct, setEditingProduct] = useState(emptyProduct);
   useEffect(() => {
-    // setEditingProduct(props.product);
-    // setOpen(props.visible);
     console.log("Open = " + open + " product = " + selectedProduct.id);
-    // setOpen(open);
   }, []);
 
   const ep = useSelector((state: RootState) => {
     var p = state.editingProduct.product;
     console.log("Editing product: id = " + p.id + ", name = " + p.name);
-    // setEditingProduct(state.editingProduct.product);
     return p;
   });
 
-  // const openSelector = useSelector(
-  //   (state: RootState) => state.editingProduct.visible
-  // );
-
   const onFormOpen = () => {
-    console.log("On visible: ");
-    // const p = useSelector((state: RootState) => {
-    //   console.log(
-    //     "Selected product changed to " + state.editingProduct.product.id
-    //   );
-    //   // setEditingProduct(state.editingProduct.product);
-    //   return state.editingProduct.product;
-    // });
     setEditingProduct(ep);
   };
 
   const onValueChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    // console.log(
-    //   e.currentTarget.name +
-    //     " was changed from " +
-    //     eProduct.importPrice +
-    //     " to " +
-    //     e.currentTarget.value
-    // );
-    // eProduct.importPrice = 65;
     setEditingProduct({
       ...selectedProduct,
       [e.currentTarget.name]: e.currentTarget.value,
     });
-    // setEditingProduct({
-    //   product
-    // })
-    // console.info(
-    //   "Action: update, key = [%s] value = [%s]",
-    //   e.currentTarget.name,
-    //   e.currentTarget.value
-    // );
-    // editProduct(e.currentTarget.name, e.currentTarget.value);
   };
 
   const onSaveProduct = () => {
     var savedProduct = saveProduct(selectedProduct, dispatch);
   };
 
-  const onSubmit = (): void => {
-    // event.preventDefault();
-    console.log("Saving....");
-    // saveEditProduct(iProduct);
-  };
-  const handleDropdownChange = (e: React.FormEvent<HTMLSelectElement>) => {
-    // setEditingProduct({
-    //   ...eProduct,
-    //   [e.currentTarget.name]: e.currentTarget.value,
-    // });
-  };
+  const handleDropdownChange = (e: React.FormEvent<HTMLSelectElement>) => {};
   const [cities, setCities] = useState<string[]>(defaultCities);
   const dispatch = useDispatch();
   const { saveEditProduct, editProduct, abortEditProduct } = bindActionCreators(
@@ -267,5 +207,4 @@ const ProductDetail: FC = (props) => {
   );
 };
 
-// export default connect(mapStateToProps)(ProductDetail);
 export default ProductDetail;

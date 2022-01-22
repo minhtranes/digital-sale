@@ -1,6 +1,6 @@
 import { Product, emptyProduct } from "../../components/inventory/product";
 import { EditProductActionNames } from "../action-types";
-import { EditProductAction } from "../actions";
+import { EditProductAction } from "../actions/productEditActions";
 
 export type EditingProduct = {
   visible: boolean;
