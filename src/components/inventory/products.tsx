@@ -11,80 +11,8 @@ import { bindActionCreators } from "redux";
 import { listAll } from "../../services/product.service";
 import { Product, emptyProduct } from "./product";
 import { RootState } from "../../state/reducers";
+import { Button } from "reactstrap";
 
-const columns = [
-  {
-    name: "Id",
-    selector: "id",
-    sortable: true,
-    width: "48px",
-  },
-  // {
-  //   name: "IdS",
-  //   selector: "idString",
-  //   sortable: true,
-  // },
-  {
-    name: "Name",
-    selector: "name",
-    sortable: true,
-  },
-  {
-    name: "Retail Department",
-    selector: "retailDepartment",
-    sortable: true,
-  },
-  {
-    name: "City",
-    selector: "city",
-    sortable: true,
-  },
-  // {
-  //   name: "Phone Number",
-  //   selector: "phoneNumber",
-  //   sortable: false,
-  // },
-  {
-    name: "Currency",
-    selector: "currency",
-    sortable: false,
-  },
-  // {
-  //   name: "Business Address",
-  //   selector: "curbusinessAddressrency",
-  //   sortable: false,
-  // },
-  {
-    name: "Import Price",
-    selector: "importPrice",
-    sortable: false,
-  },
-  {
-    name: "Sale Price",
-    selector: "salePrice",
-    sortable: false,
-  },
-  // {
-  //   name: "Shipping Address",
-  //   selector: "shippingAddress",
-  //   sortable: false,
-  // },
-  // {
-  //   name: "Import Date",
-  //   selector: "importDate",
-  //   sortable: false,
-  // },
-  // {
-  //   name: "Expiration Date",
-  //   selector: "expirationDate",
-  //   sortable: false,
-  // },
-  // {
-  //   name: "Expired",
-  //   selector: "expired",
-  //   sortable: false,
-  // },
-];
 const customStyles = {
   rows: {
     style: {
@@ -137,14 +65,10 @@ const customStyles = {
   },
 };
 
+const bgLoadSize = 1000;
+const paginationRowsPerPageOptions = [10, 15, 20, 50, 100];
+
 const Products: FC = (Props) => {
-  const productList = useSelector((state: RootState) => {
-    console.info(
-      "Product list totalElements = [%s]",
-      state.productList.totalElements
-    );
-    return state.productList;
-  });
   const editingProduct = useSelector((state: RootState) => {
     return state.editingProduct.product;
   });
@@ -162,28 +86,71 @@ const Products: FC = (Props) => {
     setSelectedProducts(s.selectedRows);
   };
 
-  const [paginationPerPage, setPaginationPerPage] = useState<number>(10);
-
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setLoading(true);
-    listAll(0).then((r) => {
-      console.info(r.data);
-      loadComplete(r.data.content, r.data.totalElements);
-      setLoading(false);
-    });
+    try {
+      listAll(0, bgLoadSize).then((r) => {
+        console.info(r.data);
+        loadComplete(r.data.content, r.data.totalElements);
+        setLoading(false);
+      });
+    } catch (error) {}
   }, []);
 
-  const handlePageChange = (page: number, totalRows: number) => {
-    setLoading(true);
+  const [isBgLoading, setBgLoading] = useState(false);
+  const backgroundLoad = () => {
+    try {
+      if (isBgLoading) {
+        console.info("The background loading is working");
+        return;
+      }
+      var loadedElements = productList.products.length;
+      var totalElements = productList.totalElements;
+      console.info(
+        "Background loading check: loadedElements=%s, totalElements=%s",
+        loadedElements,
+        totalElements
+      );
+      if (loadedElements >= totalElements) {
+        console.info("All product were loaded");
+        setBgLoading(false);
+        return;
+      }
+      setBgLoading(true);
+      var page = productList.products.length / bgLoadSize;
+      listAll(page, bgLoadSize).then((r) => {
+        console.info(r.data);
+        loadComplete(r.data.content, r.data.totalElements);
+        setBgLoading(false);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    console.log("Page: [%s]", page);
-    listAll(page).then((r) => {
-      console.info(r.data);
-      loadComplete(r.data.content, r.data.totalElements);
-      setLoading(false);
-    });
+  const productList = useSelector((state: RootState) => {
+    console.info(
+      "Product list totalElements = [%s]",
+      state.productList.totalElements
+    );
+
+    return state.productList;
+  });
+
+  const pageChange = (page: number, totalRows: number) => {
+    console.log("Page: [%s], totalRows: [%s]", page, totalRows);
+    backgroundLoad();
+    //     if(page*rowsPerPage<totalRows){
+    // setLoading(true);
+
+    //     listAll(page).then((r) => {
+    //       console.info(r.data);
+    //       loadComplete(r.data.content, r.data.totalElements);
+    //       setLoading(false);
+    //     });
+    //     }
   };
 
   const dispatch = useDispatch();
@@ -194,6 +161,113 @@ const Products: FC = (Props) => {
 
   const { saveEditProduct, editProduct, abortEditProduct, beginEditProduct } =
     bindActionCreators(actionCreators, dispatch);
+
+  const columns = [
+    {
+      name: "Id",
+      selector: "id",
+      sortable: true,
+      width: "48px",
+    },
+    // {
+    //   name: "IdS",
+    //   selector: "idString",
+    //   sortable: true,
+    // },
+    {
+      name: "Name",
+      selector: "name",
+      sortable: true,
+    },
+    {
+      name: "Retail Department",
+      selector: "retailDepartment",
+      sortable: true,
+    },
+    {
+      name: "City",
+      selector: "city",
+      sortable: true,
+    },
+    // {
+    //   name: "Phone Number",
+    //   selector: "phoneNumber",
+    //   sortable: false,
+    // },
+    {
+      name: "Currency",
+      selector: "currency",
+      sortable: false,
+    },
+    // {
+    //   name: "Business Address",
+    //   selector: "curbusinessAddressrency",
+    //   sortable: false,
+    // },
+    {
+      name: "Import Price",
+      selector: "importPrice",
+      sortable: false,
+    },
+    {
+      name: "Sale Price",
+      selector: "salePrice",
+      sortable: false,
+    },
+    // {
+    //   name: "Shipping Address",
+    //   selector: "shippingAddress",
+    //   sortable: false,
+    // },
+    // {
+    //   name: "Import Date",
+    //   selector: "importDate",
+    //   sortable: false,
+    // },
+    // {
+    //   name: "Expiration Date",
+    //   selector: "expirationDate",
+    //   sortable: false,
+    // },
+    // {
+    //   name: "Expired",
+    //   selector: "expired",
+    //   sortable: false,
+    // },
+
+    {
+      name: "Edit",
+      selector: "expired",
+      sortable: false,
+      ignoreRowClick: true,
+      allowOverflow: true,
+      button: true,
+      cell: () => (
+        <Button
+          raised
+          primary
+          onClick={() => beginEditProduct(selectedProducts[0])}
+        >
+          Detail
+        </Button>
+      ),
+    },
+  ];
+  const changeRowsPerPage = (
+    currentRowsPerPage: number,
+    currnetPage: number
+  ) => {
+    console.info(
+      "Row per page currentRowsPerPage: %s, currnetPage: %s",
+      currentRowsPerPage,
+      currnetPage
+    );
+    setRowsPerPage(currentRowsPerPage);
+  };
+
+  const [rowsPerPage, setRowsPerPage] = useState(
+    paginationRowsPerPageOptions[0]
+  );
 
   return (
     <div className="flex flex-col h-full w-full bg-gray-400">
@@ -224,13 +298,14 @@ const Products: FC = (Props) => {
           responsive={true}
           paginationTotalRows={productList.totalElements}
           highlightOnHover={true}
-          onChangePage={handlePageChange}
+          onChangePage={pageChange}
+          onChangeRowsPerPage={changeRowsPerPage}
           progressPending={loading}
-          paginationPerPage={paginationPerPage}
           paginationServer={false}
           // onRowDoubleClicked={setSelectedProduct}
           selectableRowsHighlight={true}
-          paginationRowsPerPageOptions={[10, 15, 20, 50, 100]}
+          paginationPerPage={rowsPerPage}
+          paginationRowsPerPageOptions={paginationRowsPerPageOptions}
           clearSelectedRows={
             editingProduct === null ||
             editingProduct === undefined ||

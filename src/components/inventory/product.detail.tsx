@@ -34,10 +34,12 @@ const ProductDetail: FC = (props) => {
   };
 
   const onSaveProduct = () => {
-    saveProduct(selectedProduct).then((r) => {
-      updateProducts([r.data]);
-      saveEditProduct(r.data);
-    });
+    try {
+      saveProduct(selectedProduct).then((r) => {
+        updateProducts([r.data]);
+        saveEditProduct(r.data);
+      });
+    } catch (error) {}
   };
 
   const handleDropdownChange = (e: React.FormEvent<HTMLSelectElement>) => {};

@@ -7,9 +7,10 @@ export const saveProduct = (p: Product): Promise<AxiosResponse<Product>> => {
 };
 
 export const listAll = (
-  page: number
+  page: number,
+  size: number
 ): Promise<AxiosResponse<{ content: Product[]; totalElements: number }>> => {
-  return http.get(`/inventory/list?page=` + page);
+  return http.get(`/inventory/list?page=` + page + `&size=` + size);
 };
 
 export const getOne = (id: number): Promise<AxiosResponse<Product>> => {
