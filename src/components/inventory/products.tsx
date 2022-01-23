@@ -1,5 +1,5 @@
 import SortIcon from "@material-ui/icons/ArrowDownward";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import DataTable from "react-data-table-component";
 import "../navbar/Button.css";
 import "./Products.css";
@@ -269,6 +269,31 @@ const Products: FC = (Props) => {
     paginationRowsPerPageOptions[0]
   );
 
+  const [filterText, setFilterText] = useState("");
+  const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
+  const filteredItems = productList.products.filter(
+    (item) =>
+      item.name && item.name.toLowerCase().includes(filterText.toLowerCase())
+  );
+
+  const subHeaderComponentMemo = useMemo(() => {
+    const handleClear = () => {
+      if (filterText) {
+        setResetPaginationToggle(!resetPaginationToggle);
+        setFilterText("");
+      }
+    };
+
+    return (
+      <input
+        onChange={(e) => setFilterText(e.target.value)}
+        // onFilter={(e) => setFilterText(e.target.value)}
+        // onClear={handleClear}
+        // filterText={filterText}
+      />
+    );
+  }, [filterText, resetPaginationToggle]);
+
   return (
     <div className="flex flex-col h-full w-full bg-gray-400">
       <ProductDetail />
@@ -287,7 +312,7 @@ const Products: FC = (Props) => {
           fixedHeader={true}
           fixedHeaderScrollHeight="100"
           columns={columns}
-          data={productList.products}
+          data={filteredItems}
           defaultSortField="id"
           sortIcon={<SortIcon />}
           pagination
@@ -303,6 +328,9 @@ const Products: FC = (Props) => {
           progressPending={loading}
           paginationServer={false}
           // onRowDoubleClicked={setSelectedProduct}
+          paginationResetDefaultPage={resetPaginationToggle}
+          subHeader
+          subHeaderComponent={subHeaderComponentMemo}
           selectableRowsHighlight={true}
           paginationPerPage={rowsPerPage}
           paginationRowsPerPageOptions={paginationRowsPerPageOptions}
