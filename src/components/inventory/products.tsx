@@ -86,9 +86,12 @@ const Products: FC = (Props) => {
     setSelectedProducts(s.selectedRows);
   };
 
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    if (productList.products.length > 0) {
+      return;
+    }
     setLoading(true);
     try {
       listAll(0, bgLoadSize).then((r) => {
@@ -118,11 +121,13 @@ const Products: FC = (Props) => {
         setBgLoading(false);
         return;
       }
+
       setBgLoading(true);
       var page = productList.products.length / bgLoadSize;
       listAll(page, bgLoadSize).then((r) => {
         console.info(r.data);
         loadComplete(r.data.content, r.data.totalElements);
+
         setBgLoading(false);
       });
     } catch (error) {
