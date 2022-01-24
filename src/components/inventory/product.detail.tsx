@@ -34,15 +34,16 @@ const ProductDetail: FC = (props) => {
   };
 
   const onSaveProduct = () => {
-    try {
-      saveProduct(selectedProduct).then((r) => {
-        updateProducts([r.data]);
-        saveEditProduct(r.data);
-      });
-    } catch (error) {}
+
+    saveProduct(selectedProduct).then((r) => {
+      updateProducts([r.data]);
+      saveEditProduct(r.data);
+    }).catch(err => {
+
+    });
   };
 
-  const handleDropdownChange = (e: React.FormEvent<HTMLSelectElement>) => {};
+  const handleDropdownChange = (e: React.FormEvent<HTMLSelectElement>) => { };
   const [cities, setCities] = useState<string[]>(defaultCities);
   const dispatch = useDispatch();
   const { saveEditProduct, editProduct, abortEditProduct } = bindActionCreators(

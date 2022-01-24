@@ -93,46 +93,43 @@ const Products: FC = (Props) => {
       return;
     }
     setLoading(true);
-    try {
-      listAll(0, bgLoadSize).then((r) => {
-        console.info(r.data);
-        loadComplete(r.data.content, r.data.totalElements);
-        setLoading(false);
-      });
-    } catch (error) {}
+
+    listAll(0, bgLoadSize).then((r) => {
+      console.info(r.data);
+      loadComplete(r.data.content, r.data.totalElements);
+      setLoading(false);
+    }).catch(error => { });
+
   }, []);
 
   const [isBgLoading, setBgLoading] = useState(false);
   const backgroundLoad = () => {
-    try {
-      if (isBgLoading) {
-        console.info("The background loading is working");
-        return;
-      }
-      var loadedElements = productList.products.length;
-      var totalElements = productList.totalElements;
-      console.info(
-        "Background loading check: loadedElements=%s, totalElements=%s",
-        loadedElements,
-        totalElements
-      );
-      if (loadedElements >= totalElements) {
-        console.info("All product were loaded");
-        setBgLoading(false);
-        return;
-      }
 
-      setBgLoading(true);
-      var page = productList.products.length / bgLoadSize;
-      listAll(page, bgLoadSize).then((r) => {
-        console.info(r.data);
-        loadComplete(r.data.content, r.data.totalElements);
-
-        setBgLoading(false);
-      });
-    } catch (error) {
-      console.error(error);
+    if (isBgLoading) {
+      console.info("The background loading is working");
+      return;
     }
+    var loadedElements = productList.products.length;
+    var totalElements = productList.totalElements;
+    console.info(
+      "Background loading check: loadedElements=%s, totalElements=%s",
+      loadedElements,
+      totalElements
+    );
+    if (loadedElements >= totalElements) {
+      console.info("All product were loaded");
+      setBgLoading(false);
+      return;
+    }
+
+    setBgLoading(true);
+    var page = productList.products.length / bgLoadSize;
+    listAll(page, bgLoadSize).then((r) => {
+      console.info(r.data);
+      loadComplete(r.data.content, r.data.totalElements);
+
+      setBgLoading(false);
+    }).catch(error => { });
   };
 
   const productList = useSelector((state: RootState) => {
@@ -292,9 +289,9 @@ const Products: FC = (Props) => {
     return (
       <input
         onChange={(e) => setFilterText(e.target.value)}
-        // onFilter={(e) => setFilterText(e.target.value)}
-        // onClear={handleClear}
-        // filterText={filterText}
+      // onFilter={(e) => setFilterText(e.target.value)}
+      // onClear={handleClear}
+      // filterText={filterText}
       />
     );
   }, [filterText, resetPaginationToggle]);
