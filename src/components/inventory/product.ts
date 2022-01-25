@@ -3,7 +3,7 @@ export interface Product {
   idString: string;
   name: string;
   retailDepartment: string;
-  city: number;
+  city: string;
   phoneNumber: string;
   currency: string;
   businessAddress: string;
@@ -20,7 +20,7 @@ export const emptyProduct: Product = {
   idString: "",
   name: "",
   retailDepartment: "",
-  city: 0,
+  city: "",
   phoneNumber: "",
   currency: "",
   businessAddress: "",

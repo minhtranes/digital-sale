@@ -12,6 +12,7 @@ import { listAll } from "../../services/product.service";
 import { Product, emptyProduct } from "./product";
 import { RootState } from "../../state/reducers";
 import { Button } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const customStyles = {
   rows: {
@@ -73,18 +74,18 @@ const Products: FC = (Props) => {
     return state.editingProduct.product;
   });
 
-  const [selectedProducts, setSelectedProducts] = useState<Product[]>([
-    emptyProduct,
-  ]);
+  // const [selectedProducts, setSelectedProducts] = useState<Product[]>([
+  //   emptyProduct,
+  // ]);
 
-  const handleSelectedChange = (s: {
-    allSelected: boolean;
-    selectedCount: number;
-    selectedRows: Product[];
-  }) => {
-    console.info("handleSelectedChange");
-    setSelectedProducts(s.selectedRows);
-  };
+  // const handleSelectedChange = (s: {
+  //   allSelected: boolean;
+  //   selectedCount: number;
+  //   selectedRows: Product[];
+  // }) => {
+  //   console.info("handleSelectedChange");
+  //   setSelectedProducts(s.selectedRows);
+  // };
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -242,19 +243,64 @@ const Products: FC = (Props) => {
       selector: "expired",
       sortable: false,
       ignoreRowClick: true,
-      allowOverflow: true,
+      allowOverflow: false,
       button: true,
-      cell: () => (
-        <Button
-          raised
-          primary
-          onClick={() => beginEditProduct(selectedProducts[0])}
+      cell: (product: Product) => (
+        //         <a href={beginEditProduct(selectedProducts[0])} target="_blank" rel="noopener noreferrer">
+        // 60				Download
+        // 61			</a>
+        <Link
+          className="navbar-icon h-5 text-sm font-sans font-medium underline"
+          to="#"
+          onClick={() => {
+            console.info("Edit product id = %s", product.id);
+            // setSelectedProducts([product]);
+            beginEditProduct(product);
+          }}
         >
-          Detail
-        </Button>
+          Edit
+        </Link>
+        // <Button className=""
+        //   raised
+        //   primary
+        //   onClick={() => beginEditProduct(selectedProducts[0])}
+        // >
+        //   Detail
+        // </Button>
+      ),
+    },
+    {
+      name: "Delete",
+      selector: "deleted",
+      sortable: false,
+      ignoreRowClick: true,
+      allowOverflow: false,
+      button: true,
+      cell: (product: Product) => (
+        //         <a href={beginEditProduct(selectedProducts[0])} target="_blank" rel="noopener noreferrer">
+        // 60				Download
+        // 61			</a>
+        <Link
+          className="navbar-icon h-5 text-sm font-sans font-medium underline"
+          to="#"
+          onClick={() => {
+            console.info("Delete product id = %s", product.id);
+          }}
+        >
+          Delete
+        </Link>
+        // <Button className=""
+        //   raised
+        //   primary
+        //   onClick={() => beginEditProduct(selectedProducts[0])}
+        // >
+        //   Detail
+        // </Button>
       ),
     },
   ];
+
+  const onRowEdit = (htmlElement: HTMLAnchorElement) => {};
   const changeRowsPerPage = (
     currentRowsPerPage: number,
     currnetPage: number
@@ -303,7 +349,7 @@ const Products: FC = (Props) => {
         <button
           className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md shadow-sm text-base font-sm text-white bg-indigo-600 hover:bg-indigo-700"
           onClick={() => {
-            beginEditProduct(selectedProducts[0]);
+            beginEditProduct(emptyProduct);
           }}
         >
           Add Product
@@ -318,8 +364,8 @@ const Products: FC = (Props) => {
           defaultSortField="id"
           sortIcon={<SortIcon />}
           pagination
-          selectableRows
-          onSelectedRowsChange={handleSelectedChange}
+          selectableRows={false}
+          // onSelectedRowsChange={handleSelectedChange}
           customStyles={customStyles}
           striped={false}
           responsive={true}

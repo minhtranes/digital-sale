@@ -64,7 +64,7 @@ const ProductDetail: FC = (props) => {
       modal
     >
       <div className="modal">
-        <div className="header">Import Product</div>
+        <div className="header">Product Detail</div>
         <form className="content">
           <div style={{ display: "inline-block" }}>
             <div className="field">
