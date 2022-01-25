@@ -27,6 +27,7 @@ function classNames(...classes: string[]) {
 }
 
 export default function App() {
+  require("dotenv").config();
   var sideBar = document.getElementById("mobile-nav");
   var toggler = document.getElementById("mobile-toggler");
 
