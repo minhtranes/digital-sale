@@ -335,16 +335,16 @@ const Products: FC = (Props) => {
     return (
       <div>
         <Link
-          className="navbar-icon h-5 text-sm font-sans font-medium underline"
+          className="navbar-icon h-5 text-sm font-sans font-medium underline mr-5"
           to="#"
           onClick={() => {
             console.info("Add product");
             beginEditProduct(emptyProduct)
           }}
         >
-          Add Product
+          + Add Product
         </Link>
-        <input
+        <input className="border border-gray-700"
           onChange={(e) => setFilterText(e.target.value)}
         />
       </div>
@@ -355,14 +355,14 @@ const Products: FC = (Props) => {
     <div className="flex flex-col h-full w-full bg-gray-400">
       <ProductDetail />
       <div className="flex px-2 justify-between py-1">
-        <button
+        {/* <button
           className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md shadow-sm text-base font-sm text-white bg-indigo-600 hover:bg-indigo-700"
           onClick={() => {
             beginEditProduct(emptyProduct);
           }}
         >
           Add Product
-        </button>
+        </button> */}
       </div>
       <div className="w-full h-full">
         <DataTable
