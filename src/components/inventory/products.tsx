@@ -352,7 +352,7 @@ const Products: FC = (Props) => {
             type="text"
             placeholder="Product Name" value={filterText}
           />
-          <div className="text-gray-500  ml-4 inset-0 m-auto w-4 h-4">
+          <div className="text-gray-500  ml-1 inset-0 m-auto w-4 h-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="icon icon-tabler icon-tabler-search"
