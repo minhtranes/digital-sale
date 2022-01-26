@@ -233,7 +233,7 @@ export default function App() {
                 </div>
               </li>
             </ul>
-            <div className="flex justify-center mt-40 mb-4 w-full">
+            {/* <div className="flex justify-center mt-40 mb-4 w-full">
               <div className="relative ">
                 <div className="text-gray-500 absolute ml-4 inset-0 m-auto w-4 h-4">
                   <svg
@@ -259,7 +259,7 @@ export default function App() {
                   placeholder="Search"
                 />
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="px-8 border-t border-gray-700">
             <ul className="w-full flex items-center justify-between bg-gray-800">

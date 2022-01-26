@@ -333,9 +333,9 @@ const Products: FC = (Props) => {
     };
 
     return (
-      <div>
+      <div className="flex justify-center ">
         <Link
-          className="navbar-icon h-5 text-sm font-sans font-medium underline mr-5"
+          className="navbar-icon h-5 text-sm font-sans font-medium underline mr-5 py-2"
           to="#"
           onClick={() => {
             console.info("Add product");
@@ -344,11 +344,35 @@ const Products: FC = (Props) => {
         >
           + Add Product
         </Link>
-        <input className="focus:outline-none rounded text-sm text-gray-500 bg-gray-100 pl-2 py-1"
-          onChange={(e) => setFilterText(e.target.value)}
-          type="text"
-          placeholder="Product Name"
-        />
+
+        <div className="flex">
+
+          <input className="focus:outline-none rounded text-sm text-gray-500 bg-gray-100 pl-2 py-1"
+            onChange={(e) => setFilterText(e.target.value)}
+            type="text"
+            placeholder="Product Name" value={filterText}
+          />
+          <div className="text-gray-500  ml-4 inset-0 m-auto w-4 h-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-search"
+              width={16}
+              height={16}
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              onClick={(e) => setFilterText('')}
+            >
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <circle cx={10} cy={10} r={7} />
+              <line x1={21} y1={21} x2={15} y2={15} />
+            </svg>
+          </div>
+        </div>
+
       </div>
     );
   }, [filterText, resetPaginationToggle]);
