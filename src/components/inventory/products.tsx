@@ -170,7 +170,9 @@ const Products: FC = (Props) => {
       name: "Id",
       selector: "id",
       sortable: true,
-      width: "48px",
+      minWidth: "18px",
+      maxWidth: "68px",
+      center: true,
     },
     // {
     //   name: "IdS",
