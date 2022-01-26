@@ -344,8 +344,10 @@ const Products: FC = (Props) => {
         >
           + Add Product
         </Link>
-        <input className="border border-gray-700"
+        <input className="focus:outline-none rounded text-sm text-gray-500 bg-gray-100 pl-2 py-1"
           onChange={(e) => setFilterText(e.target.value)}
+          type="text"
+          placeholder="Product Name"
         />
       </div>
     );
