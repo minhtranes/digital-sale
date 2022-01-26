@@ -300,7 +300,7 @@ const Products: FC = (Props) => {
     },
   ];
 
-  const onRowEdit = (htmlElement: HTMLAnchorElement) => {};
+  const onRowEdit = (htmlElement: HTMLAnchorElement) => { };
   const changeRowsPerPage = (
     currentRowsPerPage: number,
     currnetPage: number
@@ -333,12 +333,21 @@ const Products: FC = (Props) => {
     };
 
     return (
-      <input
-        onChange={(e) => setFilterText(e.target.value)}
-      // onFilter={(e) => setFilterText(e.target.value)}
-      // onClear={handleClear}
-      // filterText={filterText}
-      />
+      <div>
+        <Link
+          className="navbar-icon h-5 text-sm font-sans font-medium underline"
+          to="#"
+          onClick={() => {
+            console.info("Add product");
+            beginEditProduct(emptyProduct)
+          }}
+        >
+          Add Product
+        </Link>
+        <input
+          onChange={(e) => setFilterText(e.target.value)}
+        />
+      </div>
     );
   }, [filterText, resetPaginationToggle]);
 
