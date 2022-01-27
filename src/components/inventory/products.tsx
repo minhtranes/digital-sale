@@ -145,15 +145,6 @@ const Products: FC = (Props) => {
   const pageChange = (page: number, totalRows: number) => {
     console.log("Page: [%s], totalRows: [%s]", page, totalRows);
     backgroundLoad();
-    //     if(page*rowsPerPage<totalRows){
-    // setLoading(true);
-
-    //     listAll(page).then((r) => {
-    //       console.info(r.data);
-    //       loadComplete(r.data.content, r.data.totalElements);
-    //       setLoading(false);
-    //     });
-    //     }
   };
 
   const dispatch = useDispatch();
@@ -302,7 +293,7 @@ const Products: FC = (Props) => {
     },
   ];
 
-  const onRowEdit = (htmlElement: HTMLAnchorElement) => { };
+  
   const changeRowsPerPage = (
     currentRowsPerPage: number,
     currnetPage: number
@@ -325,6 +316,10 @@ const Products: FC = (Props) => {
     (item) =>
       item.name && item.name.toLowerCase().includes(filterText.toLowerCase())
   );
+
+  const onRowDoubleClicked = (product: Product) =>{
+    beginEditProduct(product)
+  }
 
   const subHeaderComponentMemo = useMemo(() => {
     const handleClear = () => {
@@ -383,14 +378,7 @@ const Products: FC = (Props) => {
     <div className="flex flex-col h-full w-full bg-gray-400">
       <ProductDetail />
       <div className="flex px-2 justify-between py-1">
-        {/* <button
-          className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md shadow-sm text-base font-sm text-white bg-indigo-600 hover:bg-indigo-700"
-          onClick={() => {
-            beginEditProduct(emptyProduct);
-          }}
-        >
-          Add Product
-        </button> */}
+        {/* Add controller into action bar  */}
       </div>
       <div className="w-full h-full">
         <DataTable
@@ -402,7 +390,6 @@ const Products: FC = (Props) => {
           sortIcon={<SortIcon />}
           pagination
           selectableRows={false}
-          // onSelectedRowsChange={handleSelectedChange}
           customStyles={customStyles}
           striped={false}
           responsive={true}
@@ -412,7 +399,7 @@ const Products: FC = (Props) => {
           onChangeRowsPerPage={changeRowsPerPage}
           progressPending={loading}
           paginationServer={false}
-          // onRowDoubleClicked={setSelectedProduct}
+          onRowDoubleClicked={onRowDoubleClicked}
           paginationResetDefaultPage={resetPaginationToggle}
           subHeader
           subHeaderComponent={subHeaderComponentMemo}
