@@ -11,7 +11,6 @@ import { bindActionCreators } from "redux";
 import { listAll } from "../../services/product.service";
 import { Product, emptyProduct } from "./product";
 import { RootState } from "../../state/reducers";
-import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 const customStyles = {
@@ -69,7 +68,8 @@ const customStyles = {
 const bgLoadSize = 1000;
 const paginationRowsPerPageOptions = [10, 15, 20, 50, 100];
 
-const Products: FC = (Props) => {
+const Products: FC = (props) => {
+
   const editingProduct = useSelector((state: RootState) => {
     return state.editingProduct.product;
   });
@@ -317,9 +317,16 @@ const Products: FC = (Props) => {
       item.name && item.name.toLowerCase().includes(filterText.toLowerCase())
   );
 
-  const onRowDoubleClicked = (product: Product) =>{
+  const onRowDoubleClicked = (product: Product) => {
     beginEditProduct(product)
   }
+
+  const onSelectedRowsChange = (rows: {allSelected: boolean, selectedCount: number, selectedRows: Product[]}) => {
+    console.info("allSelected: %s, selectedCount: %s, firstSelectedId: %s", rows.allSelected, rows.selectedCount, rows.selectedCount>0?rows.selectedRows[0].id:'-1')
+  }
+  
+
+  // const onSelectedRowsChange = (selectedRowState)
 
   const subHeaderComponentMemo = useMemo(() => {
     const handleClear = () => {
@@ -330,7 +337,7 @@ const Products: FC = (Props) => {
     };
 
     return (
-      <div className="flex justify-center ">
+      <div className="flex justify-center " >
         <Link
           className="navbar-icon h-5 text-sm font-sans font-medium underline mr-5 py-2"
           to="#"
@@ -380,8 +387,8 @@ const Products: FC = (Props) => {
       <div className="flex px-2 justify-between py-1">
         {/* Add controller into action bar  */}
       </div>
-      <div className="w-full h-full">
-        <DataTable
+      <div className="w-full h-full" >
+        <DataTable 
           fixedHeader={true}
           fixedHeaderScrollHeight="100"
           columns={columns}
@@ -390,8 +397,10 @@ const Products: FC = (Props) => {
           sortIcon={<SortIcon />}
           pagination
           selectableRows={false}
+          selectableRowsHighlight={true}
           customStyles={customStyles}
           striped={false}
+          
           responsive={true}
           paginationTotalRows={productList.totalElements}
           highlightOnHover={true}
@@ -399,11 +408,11 @@ const Products: FC = (Props) => {
           onChangeRowsPerPage={changeRowsPerPage}
           progressPending={loading}
           paginationServer={false}
+          onSelectedRowsChange={onSelectedRowsChange}
           onRowDoubleClicked={onRowDoubleClicked}
           paginationResetDefaultPage={resetPaginationToggle}
           subHeader
           subHeaderComponent={subHeaderComponentMemo}
-          selectableRowsHighlight={true}
           paginationPerPage={rowsPerPage}
           paginationRowsPerPageOptions={paginationRowsPerPageOptions}
           clearSelectedRows={
